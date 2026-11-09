@@ -1,0 +1,6454 @@
+/*
+ * Author       : prasanna.k.2024.cse_rajal744
+ * Generated on : 08-Nov-2026 19:46:23
+ * Version      : 1.0
+ */
+ application "Civic Resolve Grievance System"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form citizen
+		{
+			displayname = "Citizen"
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			citizen_name
+			(
+    			type = name
+				displayname = "Citizen Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+	     			 visibility = false
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			email
+			(
+    			type = email
+				displayname = "Email"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			mobile_number
+			(
+    			type = phonenumber
+				displayname = "Mobile Number"
+    			allowedcountries={in}
+    			defaultcountry="in"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			address
+			(
+    			type = address
+				displayname = "Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+	     			 visibility = false
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+	     			 visibility = false
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+	     			 visibility = false
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+	     			 visibility = false
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+	     			 visibility = false
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "Latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "Longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			postal_code1
+			(
+    			type = text
+				displayname = "Postal Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			preferred_contact_method
+			(
+				type = picklist
+				displayname = "Preferred Contact Method"
+				values = {"Email","Phone","Both"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			registration_date
+			(
+    			type = date
+				displayname = "Registration Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			account_status
+			(
+				type = radiobuttons
+				displayname = "Account Status"
+				values = {"Active","Inactive"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			crm_contact_id
+			(
+    			type = text
+				displayname = "CRM Contact ID"
+				private = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form citizen_feedback
+		{
+			displayname = "Citizen Feedback"
+			success message = "Feedback Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			complaint
+			(
+				type = list	
+				displayname = "Complaint"
+				values  = complaint.ID
+    			displayformat = [complaint_title]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			citizen
+			(
+				type = list	
+				displayname = "Citizen"
+				values  = citizen.ID
+    			displayformat = [" - " + citizen_name.first_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			rating
+			(
+				type = number
+				displayname = "Rating"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			feedback_comments
+			(
+    			type = textarea
+				displayname = "Feedback Comments"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			submitted_date
+			(
+    			type = date
+				displayname = "Submitted Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			feedback_status
+			(
+				type = picklist
+				displayname = "Feedback Status"
+				values = {"Submitted","Pending","Processed"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form closure_review
+		{
+			displayname = "Closure Review"
+			success message = "Closure Review Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have complaint_selection
+			(
+				type = picklist	
+				displayname = "Complaint Selection"
+				values  = complaint.ID
+    			displayformat = [complaint_title]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			requested_by
+			(
+				type = list	
+				displayname = "Requested By"
+				values  = citizen.ID
+    			displayformat = [citizen_name.first_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			review_reason
+			(
+    			type = text
+				displayname = "Review Reason"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			review_description
+			(
+    			type = textarea
+				displayname = "Review Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			evidence_attachment
+			(
+    			type = url
+				displayname = "Evidence Attachment"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			review_status
+			(
+				type = picklist
+				displayname = "Review Status"
+				values = {"Under Review","Approved","Rejected","Pending"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			assigned_reviewer
+			(
+				type = list	
+				displayname = "Assigned Reviewer"
+				values  = officer.ID
+    			displayformat = [officer_name.first_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			review_remarks
+			(
+    			type = textarea
+				displayname = "Review Remarks"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			review_date
+			(
+    			type = date
+				displayname = "Review Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			created_date
+			(
+    			type = date
+				displayname = "Created Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Active_Status_Prediction
+			(
+    			type = text
+				displayname = "Active Status Prediction"
+	 			row = 1
+	 			column = 1   
+				width = medium
+						AI_Properties
+						(
+									fieldtype = Prediction
+									modelname = "Model_2"
+									supportingfield = {created_date,review_status}
+						)
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Pending","Approved","Rejected"}
+			}
+		}
+		form complaint
+		{
+			displayname = "Complaint"
+			success message = "Complaint submitted successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			complaint_title
+			(
+    			type = text
+				displayname = "Complaint Title"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			complaint_description
+			(
+    			type = textarea
+				displayname = "Complaint Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			citizen
+			(
+				type = list	
+				displayname = "Citizen"
+				values  = citizen.ID
+    			displayformat = [" " + citizen_name.first_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			category
+			(
+				type = picklist
+				displayname = "Category"
+				values = {"Drainage","Public Health","Roads","Street Lighting","Sanitation","Traffic","Water Supply","Parks","Other"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			priority
+			(
+				type = picklist
+				displayname = "Priority"
+				values = {"High","Low","Medium","Critical"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			location
+			(
+    			type = text
+				displayname = "Location"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			city
+			(
+    			type = text
+				displayname = "City"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			submission_date_time
+			(
+    			type = datetime
+				displayname = "Submission Date and Time"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			department
+			(
+				type = list	
+				displayname = "Department"
+				values  = department.ID
+    			displayformat = [department_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			assigned_officer
+			(
+				type = list	
+				displayname = "Assigned Officer"
+				values  = officer.ID
+    			displayformat = [" " + officer_name.first_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			status
+			(
+				type = picklist
+				displayname = "Status"
+				values = {"Assigned","Submitted","Under Review","Reopened","Escalated","Closed","In Progress","Resolved","Rejected"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			sla_due_date
+			(
+    			type = datetime
+				displayname = "SLA Due Date"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			resolution_description
+			(
+    			type = textarea
+				displayname = "Resolution Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			resolution_date
+			(
+    			type = date
+				displayname = "Resolution Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			citizen_satisfaction_rating
+			(
+				type = number
+				displayname = "Citizen Satisfaction Rating"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			citizen_feedback
+			(
+    			type = textarea
+				displayname = "Citizen Feedback"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			last_updated
+			(
+    			type = datetime
+				displayname = "Last Updated"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			crm_case_id1
+			(
+    			type = text
+				displayname = "CRM Case ID"
+				private = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Assigned","Submitted","Under Review","Closed","In Progress","Resolved"}
+			}
+		}
+		form complaint_activity_log
+		{
+			displayname = "Complaint Activity Log"
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have complaint
+			(
+				type = list	
+				displayname = "Complaint"
+				values  = complaint.ID
+    			displayformat = [complaint_title]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			previous_status
+			(
+    			type = text
+				displayname = "Previous Status"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			new_status
+			(
+    			type = text
+				displayname = "New Status"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			action_performed
+			(
+    			type = text
+				displayname = "Action Performed"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			remarks
+			(
+    			type = textarea
+				displayname = "Remarks"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			changed_by
+			(
+    			type = text
+				displayname = "Changed By"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			activity_date_time
+			(
+    			type = datetime
+				displayname = "Activity Date and Time"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			previous_officer
+			(
+				type = list	
+				displayname = "Previous Officer"
+				values  = officer.ID
+    			displayformat = [officer_name.first_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			new_officer
+			(
+				type = list	
+				displayname = "New Officer"
+				values  = officer.ID
+    			displayformat = [officer_name.first_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			previous_department
+			(
+				type = list	
+				displayname = "Previous Department"
+				values  = department.ID
+    			displayformat = [department_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			new_department
+			(
+				type = list	
+				displayname = "New Department"
+				values  = department.ID
+    			displayformat = [department_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form department
+		{
+			displayname = "Department"
+			success message = "Department Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			department_name
+			(
+    			type = text
+				displayname = "Department Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			department_code
+			(
+    			type = text
+				displayname = "Department Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			department_description
+			(
+    			type = textarea
+				displayname = "Department Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			department_head
+			(
+				type = list	
+				displayname = "Department Head"
+				values  = officer.ID
+    			displayformat = [officer_name.prefix + " - " + officer_name.first_name + " - " + officer_name.last_name + " - " + officer_name.suffix]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			contact_email
+			(
+    			type = email
+				displayname = "Contact Email"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			contact_phone
+			(
+    			type = phonenumber
+				displayname = "Contact Phone"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			office_location
+			(
+    			type = text
+				displayname = "Office Location"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			active_status
+			(
+				type = radiobuttons
+				displayname = "Active Status"
+				values = {"Active","Inactive"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			created_date
+			(
+    			type = date
+				displayname = "Created Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Active_Status_Prediction
+			(
+    			type = text
+				displayname = "Active Status Prediction"
+	 			row = 1
+	 			column = 1   
+				width = medium
+						AI_Properties
+						(
+									fieldtype = Prediction
+									modelname = "Prediction"
+									supportingfield = {created_date}
+						)
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form Government_Notices_and_Letters
+		{
+			displayname = "Government Notices and Letters"
+			success message = "Data Added Successfully!"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Image
+			(
+    			type = image
+				source  = file
+				aspect ratio = original
+				camera = primary
+				show gallery = true
+				switch camera = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Issuing_Authority
+			(
+    			type = text
+				displayname = "Issuing Authority"
+	 			row = 1
+	 			column = 1   
+				width = medium
+						AI_Properties
+						(
+									fieldtype = OCR
+									modelname = "Government_Notice_OCR"
+									basefield = Image
+									taggedfield = "Issuing Authority"
+						)
+			)
+			Notice_Content
+			(
+    			type = textarea
+				displayname = "Notice Content"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+						AI_Properties
+						(
+									fieldtype = OCR
+									modelname = "Government_Notice_OCR"
+									basefield = Image
+									taggedfield = "Notice Content"
+						)
+			)
+			Notice_Number
+			(
+    			type = text
+				displayname = "Notice Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+						AI_Properties
+						(
+									fieldtype = OCR
+									modelname = "Government_Notice_OCR"
+									basefield = Image
+									taggedfield = "Notice Number"
+						)
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form officer
+		{
+			displayname = "Officer"
+			success message = "Officer Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			officer_name
+			(
+    			type = name
+				displayname = "Officer Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+	     			 visibility = false
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			employee_code
+			(
+    			type = text
+				displayname = "Employee Code"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			email
+			(
+    			type = email
+				displayname = "Email"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			phone_number
+			(
+    			type = phonenumber
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			designation
+			(
+    			type = text
+				displayname = "Designation"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			department
+			(
+				type = list	
+				displayname = "Department"
+				values  = department.ID
+    			displayformat = [department_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			role
+			(
+				type = picklist
+				displayname = "Role"
+				values = {"Administrator","Department Head","Reviewer","Officer"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			active_status
+			(
+				type = radiobuttons
+				displayname = "Active Status"
+				values = {"Active","Inactive"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			date_joined
+			(
+    			type = date
+				displayname = "Date Joined"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form resolution_evidence
+		{
+			displayname = "Resolution Evidence"
+			success message = "Resolution Evidence Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			must have complaint
+			(
+				type = list	
+				displayname = "Complaint"
+				values  = complaint.ID
+    			displayformat = [complaint_title]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 60px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			uploaded_by
+			(
+				type = list	
+				displayname = "Uploaded By"
+				values  = officer.ID
+    			displayformat = [officer_name.first_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			evidence_type
+			(
+    			type = text
+				displayname = "Evidence Type"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			evidence_description
+			(
+    			type = textarea
+				displayname = "Evidence Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			evidence_attachment
+			(
+    			type = url
+				displayname = "Evidence Attachment"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			submission_date
+			(
+    			type = date
+				displayname = "Submission Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			verification_status
+			(
+				type = picklist
+				displayname = "Verification Status"
+				values = {"Approved","Rejected","Pending"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			verified_by
+			(
+				type = list	
+				displayname = "Verified By"
+				values  = officer.ID
+    			displayformat = [officer_name.first_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			verification_remarks
+			(
+    			type = textarea
+				displayname = "Verification Remarks"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			verification_date
+			(
+    			type = date
+				displayname = "Verification Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Verified","Rejected","Pending"}
+			}
+		}
+	}
+	reports
+	{
+		list complaint_activity_log_Report
+		{
+			displayName = "Complaint Activity Log Report"
+			show all rows from complaint_activity_log    
+			(
+				complaint as "Complaint"
+				previous_status as "Previous Status"
+				new_status as "New Status"
+				action_performed as "Action Performed"
+				remarks as "Remarks"
+				changed_by as "Changed By"
+				activity_date_time as "Activity Date and Time"
+				previous_officer as "Previous Officer"
+				new_officer as "New Officer"
+				previous_department as "Previous Department"
+				new_department as "New Department"
+			)
+		}
+		list complaint_Report
+		{
+			displayName = "All Complaints"
+			show all rows from complaint    
+			(
+				complaint_title as "Complaint Title"
+				complaint_description as "Complaint Description"
+				category as "Category"
+				priority as "Priority"
+				location as "Location"
+				city as "City"
+				submission_date_time as "Submission Date and Time"
+				department as "Department"
+				assigned_officer as "Assigned Officer"
+				status as "Status"
+				sla_due_date as "SLA Due Date"
+				resolution_description as "Resolution Description"
+				resolution_date as "Resolution Date"
+				citizen_satisfaction_rating as "Citizen Satisfaction Rating"
+				citizen_feedback as "Citizen Feedback"
+				last_updated as "Last Updated"
+				citizen as "Citizen"
+				ID
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (priority == "Critical")
+				fields = [priority]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (priority == "High")
+				fields = [priority]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (priority == "Medium")
+				fields = [priority]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban complaint_by_category
+		{
+			displayName = "Categories"
+			show all rows from complaint    
+			(
+				complaint_title as "Complaint Title"
+				complaint_description as "Complaint Description"
+				citizen as "Citizen"
+				category as "Category"
+				priority as "Priority"
+				location as "Location"
+				city as "City"
+				submission_date_time as "Submission Date and Time"
+				department as "Department"
+				assigned_officer as "Assigned Officer"
+				status as "Status"
+				sla_due_date as "SLA Due Date"
+				resolution_description as "Resolution Description"
+				resolution_date as "Resolution Date"
+				citizen_satisfaction_rating as "Citizen Satisfaction Rating"
+				citizen_feedback as "Citizen Feedback"
+				last_updated as "Last Updated"
+			)
+			options
+			(
+	 			display field = category
+	 		)
+		}
+		list resolution_evidence_Report
+		{
+			displayName = "All Resolution Evidence"
+			show all rows from resolution_evidence    
+			(
+				complaint as "Complaint"
+				uploaded_by as "Uploaded By"
+				evidence_type as "Evidence Type"
+				evidence_description as "Evidence Description"
+				evidence_attachment as "Evidence Attachment"
+				submission_date as "Submission Date"
+				verification_status as "Verification Status"
+				verified_by as "Verified By"
+				verification_remarks as "Verification Remarks"
+				verification_date as "Verification Date"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (verification_status == "Approved")
+				fields = [verification_status]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (verification_status == "Pending")
+				fields = [verification_status]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (verification_status == "Rejected")
+				fields = [verification_status]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban resolution_evidence_by_verification_status
+		{
+			displayName = "Verification Statuses"
+			show all rows from resolution_evidence    
+			(
+				complaint as "Complaint"
+				uploaded_by as "Uploaded By"
+				evidence_type as "Evidence Type"
+				evidence_description as "Evidence Description"
+				evidence_attachment as "Evidence Attachment"
+				submission_date as "Submission Date"
+				verification_status as "Verification Status"
+				verified_by as "Verified By"
+				verification_remarks as "Verification Remarks"
+				verification_date as "Verification Date"
+			)
+			options
+			(
+	 			display field = verification_status
+	 		)
+		}
+		list citizen_feedback_Report
+		{
+			displayName = "All Feedback"
+			show all rows from citizen_feedback    
+			(
+				complaint as "Complaint"
+				rating as "Rating"
+				feedback_comments as "Feedback Comments"
+				submitted_date as "Submitted Date"
+				feedback_status as "Feedback Status"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (feedback_status == "Pending")
+				fields = [feedback_status]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (feedback_status == "Submitted")
+				fields = [feedback_status]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+			)
+		}
+		kanban citizen_feedback_by_feedback_status
+		{
+			displayName = "Feedback Statuses"
+			show all rows from citizen_feedback    
+			(
+				complaint as "Complaint"
+				citizen as "Citizen"
+				rating as "Rating"
+				feedback_comments as "Feedback Comments"
+				submitted_date as "Submitted Date"
+				feedback_status as "Feedback Status"
+			)
+			options
+			(
+	 			display field = feedback_status
+	 		)
+		}
+		list department_Report
+		{
+			displayName = "All Departments"
+			show all rows from department    
+			(
+				department_name as "Department Name"
+				department_code as "Department Code"
+				department_description as "Department Description"
+				department_head as "Department Head"
+				contact_email as "Contact Email"
+				contact_phone as "Contact Phone"
+				office_location as "Office Location"
+				active_status as "Active Status"
+				created_date as "Created Date"
+			)
+		}
+		list citizen_Report
+		{
+			displayName = "Citizen Report"
+			show all rows from citizen    
+			(
+				citizen_name  as "Citizen Name"
+				email as "Email"
+				mobile_number as "Mobile Number"
+				address  as "Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				postal_code1 as "Postal Code"
+				preferred_contact_method as "Preferred Contact Method"
+				registration_date as "Registration Date"
+				account_status as "Account Status"
+			)
+			sort by
+			(
+				citizen_name.first_name ascending
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (preferred_contact_method == "Both")
+				fields = [preferred_contact_method]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (preferred_contact_method == "Email")
+				fields = [preferred_contact_method]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (preferred_contact_method == "Phone")
+				fields = [preferred_contact_method]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban citizen_by_preferred_contact_method
+		{
+			displayName = "Contact Methods"
+			show all rows from citizen    
+			(
+				citizen_name  as "Citizen Name"
+				email as "Email"
+				mobile_number as "Mobile Number"
+				address  as "Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				postal_code1 as "Postal Code"
+				preferred_contact_method as "Preferred Contact Method"
+				registration_date as "Registration Date"
+				account_status as "Account Status"
+			)
+			options
+			(
+	 			display field = preferred_contact_method
+	 		)
+		}
+		list closure_review_Report
+		{
+			displayName = "All Closure Reviews"
+			show all rows from closure_review    
+			(
+				requested_by as "Requested By"
+				review_reason as "Review Reason"
+				review_date as "Review Date"
+				Active_Status_Prediction as "Active Status Prediction"
+				complaint_selection as "Complaint Selection"
+				review_description as "Review Description"
+				review_status as "Review Status"
+				evidence_attachment as "Evidence Attachment"
+				assigned_reviewer as "Assigned Reviewer"
+				review_remarks as "Review Remarks"
+				created_date as "Created Date"
+			)
+		}
+		kanban closure_review_by_review_status
+		{
+			displayName = "Review Statuses"
+			show all rows from closure_review    
+			(
+				requested_by as "Requested By"
+				review_reason as "Review Reason"
+				review_description as "Review Description"
+				evidence_attachment as "Evidence Attachment"
+				review_status as "Review Status"
+				assigned_reviewer as "Assigned Reviewer"
+				review_remarks as "Review Remarks"
+				review_date as "Review Date"
+				created_date as "Created Date"
+			)
+			options
+			(
+	 			display field = review_status
+	 		)
+		}
+		list officer_Report
+		{
+			displayName = "All Officers"
+			show all rows from officer    
+			(
+				officer_name  as "Officer Name"
+				employee_code as "Employee Code"
+				email as "Email"
+				phone_number as "Phone Number"
+				designation as "Designation"
+				department as "Department"
+				role as "Role"
+				active_status as "Active Status"
+				date_joined as "Date Joined"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (role == "Administrator")
+				fields = [role]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (role == "Department Head")
+				fields = [role]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (role == "Officer")
+				fields = [role]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+				"New Formatting4"
+				{
+				condition = (role == "Reviewer")
+				fields = [role]
+				format = "color:#ffffff;background-color:#3598db;"
+				}
+			)
+		}
+		kanban officer_by_role
+		{
+			displayName = "Roles"
+			show all rows from officer    
+			(
+				officer_name  as "Officer Name"
+				employee_code as "Employee Code"
+				email as "Email"
+				phone_number as "Phone Number"
+				designation as "Designation"
+				department as "Department"
+				role as "Role"
+				active_status as "Active Status"
+				date_joined as "Date Joined"
+			)
+			options
+			(
+	 			display field = role
+	 		)
+		}
+		default list Government_Notices_and_Letters_Report
+		{
+			displayName = "Government Notices and Letters Report"
+			show all rows from Government_Notices_and_Letters    
+			(
+				Image
+				Issuing_Authority as "Issuing Authority"
+				Notice_Content as "Notice Content"
+				Notice_Number as "Notice Number"
+			)
+		}
+	}
+	pages
+	{
+		page Dashboard
+		{
+			displayname = "Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='20%'\n   \t>\n\t<panel elementName='Panel.stat.outlined.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#D5E0F5'\n\n    borderColor = '#829AC8'\n    borderWidth = '1px'\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '12px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tmargin = '0px'\n\tpadding = '0px'\n\tcolor = '#142B52'\n\tsize = '13px'\n\ttype = 'Text'\n\n\tbgColor = 'transparent'\n\tcornerRadius = '0px'\n\n\n\n\n\n    borderColor = '#142B52'\n    borderWidth = '0px'\n\n\t  value = 'Total Complaints'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#081A38'\n\tsize = '34px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.complaint.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#263E65'\n\tsize = '12px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'All complaints'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='20%'\n   \t>\n\t<panel elementName='Panel 1.stat.outlined.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#E2D2F0'\n\n    borderColor = '#B99BD5'\n    borderWidth = '1px'\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '12px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#38204F'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'New Complaints'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#241333'\n\tsize = '34px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'status == &quot;Submitted&quot;'\n\t  value = 'thisapp.complaint.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#49305F'\n\tsize = '12px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Submitted today'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='20%'\n   \t>\n\t<panel elementName='Panel 2.stat.outlined.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#F0D5B8'\n\n    borderColor = '#C99A6B'\n    borderWidth = '1px'\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '12px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#633714'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'In Progress'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#3D210D'\n\tsize = '34px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'status == &quot;In Progress&quot;'\n\t  value = 'thisapp.complaint.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#754B2A'\n\tsize = '12px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Active cases'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='20%'\n   \t>\n\t<panel elementName='Panel 3.stat.outlined.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#C5E2D5'\n\n    borderColor = '#83B99D'\n    borderWidth = '1px'\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '12px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#164B35'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Resolved Complaints'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#0B3323'\n\tsize = '34px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'status == &quot;Resolved&quot; || status == &quot;Closed&quot;'\n\t  value = 'thisapp.complaint.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#285E47'\n\tsize = '12px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Completed'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='20%'\n   \t>\n\t<panel elementName='Panel 4.stat.outlined.comfortable'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = 'transparent'\n        bgColorType = 'noFill'\n\n\t\twidth = '100%'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#EBCBD1'\n\n    borderColor = '#CC8997'\n    borderWidth = '1px'\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n    \tcornerRadius = '12px'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '24px'\n\tpaddingLeft = '24px'\n\tpaddingRight = '24px'\n\tpaddingBottom = '24px'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#70283B'\n\tsize = '13px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Overdue Complaints'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#4A1425'\n\tsize = '34px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'sla_due_date &lt; Today'\n\t  value = 'thisapp.complaint.ID.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='8px'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n>\n\t\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='auto'\n>\n\t<pc \n\t\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<text \n\n\tcolor = '#80394C'\n\tsize = '12px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Past due date'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Complaint Status'\n\n\ttype = 'Line'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'complaint'\n\txfield = 'city'\n\tyfields = 'count:status'\n/>\n\n</column><column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Department Status'\n\n\ttype = 'Stacked Web'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'department'\n\txfield = 'department_name'\n\tyfields = 'count:active_status'\n/>\n\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report 3'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'complaint_Report'\n\t\n\t\tiszreport = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row><row>\n\t<column\n   \t\t width='56%'\n   \t>\n\t<report \n\telementName='Report 2'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'department_Report'\n\t\n\t\tiszreport = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column><column\n   \t\t width='44%'\n   \t>\n\t<report \n\telementName='Report 1'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'officer_Report'\n\t\n\t\tiszreport = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+		 functions
+		 {
+			 Deluge
+			 {
+				 string Analyze_Feedback_Rating(int Minimum_Rating)
+                 {
+                 	if(Minimum_Rating < 1 || Minimum_Rating > 5)
+                 	{
+                 		return "ERROR: Please enter a rating between 1 and 5.";
+                 	}
+                 	totalFeedback = 0;
+                 	ratingTotal = 0;
+                 	result = "========================================\n";
+                 	result = result + "          CIVIC RESOLVE\n";
+                 	result = result + "    CITIZEN FEEDBACK ANALYSIS\n";
+                 	result = result + "========================================\n\n";
+                 	result = result + "REPORT SUMMARY\n";
+                 	result = result + "----------------------------------------\n";
+                 	result = result + "Minimum Rating : " + Minimum_Rating + " / 5\n";
+                 	result = result + "Generated On   : " + zoho.currenttime + "\n\n";
+                 	feedbackRecords = citizen_feedback[rating != null];
+                 	feedbackDetails = "";
+                 	for each  rec in feedbackRecords
+                 	{
+                 		if(rec.rating >= Minimum_Rating)
+                 		{
+                 			totalFeedback = totalFeedback + 1;
+                 			ratingTotal = ratingTotal + rec.rating;
+                 			comments = "No comments provided";
+                 			if(rec.feedback_comments != null && rec.feedback_comments != "")
+                 			{
+                 				comments = rec.feedback_comments;
+                 			}
+                 			feedbackDetails = feedbackDetails + "----------------------------------------\n" + "FEEDBACK #" + totalFeedback + "\n" + "----------------------------------------\n" + "Feedback ID : " + rec.ID + "\n" + "Rating      : " + rec.rating + " / 5\n" + "Status      : " + rec.feedback_status + "\n" + "Comments    : " + comments + "\n\n";
+                 		}
+                 	}
+                 	result = result + "MATCHING FEEDBACK DETAILS\n";
+                 	result = result + "========================================\n\n";
+                 	if(totalFeedback == 0)
+                 	{
+                 		result = result + "No feedback found for the selected rating.\n";
+                 	}
+                 	else
+                 	{
+                 		result = result + feedbackDetails;
+                 	}
+                 	averageRating = 0;
+                 	if(totalFeedback > 0)
+                 	{
+                 		averageRating = ratingTotal / totalFeedback;
+                 	}
+                 	result = result + "========================================\n";
+                 	result = result + "FINAL FEEDBACK SUMMARY\n";
+                 	result = result + "========================================\n";
+                 	result = result + "Matching Feedback : " + totalFeedback + "\n";
+                 	result = result + "Average Rating    : " + averageRating + " / 5\n";
+                 	result = result + "Minimum Rating    : " + Minimum_Rating + " / 5\n";
+                 	result = result + "========================================\n";
+                 	result = result + "Generated by Civic Resolve System";
+                 	return result;
+                 }
+				 string Analyze_Officer_Workload(int Minimum_Complaints)
+                 {
+                 	if(Minimum_Complaints <= 0)
+                 	{
+                 		return "ERROR: Please enter a number greater than 0.";
+                 	}
+                 	totalOfficers = 0;
+                 	result = "========================================\n";
+                 	result = result + "          CIVIC RESOLVE\n";
+                 	result = result + "       OFFICER WORKLOAD REPORT\n";
+                 	result = result + "========================================\n\n";
+                 	result = result + "REPORT SUMMARY\n";
+                 	result = result + "----------------------------------------\n";
+                 	result = result + "Minimum Complaints : " + Minimum_Complaints + "\n";
+                 	result = result + "Generated On      : " + zoho.currenttime + "\n\n";
+                 	officerDetails = "";
+                 	allOfficers = officer[ID != 0];
+                 	for each  officerRec in allOfficers
+                 	{
+                 		assignedCount = 0;
+                 		pendingCount = 0;
+                 		inProgressCount = 0;
+                 		reopenedCount = 0;
+                 		escalatedCount = 0;
+                 		assignedComplaints = complaint[assigned_officer == officerRec.ID && status != "Closed" && status != "Resolved"];
+                 		for each  comp in assignedComplaints
+                 		{
+                 			assignedCount = assignedCount + 1;
+                 			if(comp.status == "Submitted" || comp.status == "Assigned" || comp.status == "Under Review")
+                 			{
+                 				pendingCount = pendingCount + 1;
+                 			}
+                 			else if(comp.status == "In Progress")
+                 			{
+                 				inProgressCount = inProgressCount + 1;
+                 			}
+                 			else if(comp.status == "Reopened")
+                 			{
+                 				reopenedCount = reopenedCount + 1;
+                 			}
+                 			else if(comp.status == "Escalated")
+                 			{
+                 				escalatedCount = escalatedCount + 1;
+                 			}
+                 		}
+                 		if(assignedCount >= Minimum_Complaints)
+                 		{
+                 			totalOfficers = totalOfficers + 1;
+                 			officerDetails = officerDetails + "----------------------------------------\n" + "OFFICER #" + totalOfficers + "\n" + "----------------------------------------\n" + "Officer ID          : " + officerRec.ID + "\n" + "Officer Email       : " + officerRec.email + "\n" + "Total Active Cases  : " + assignedCount + "\n" + "Pending Cases       : " + pendingCount + "\n" + "In Progress Cases   : " + inProgressCount + "\n" + "Reopened Cases      : " + reopenedCount + "\n" + "Escalated Cases     : " + escalatedCount + "\n\n";
+                 		}
+                 	}
+                 	result = result + "OFFICER DETAILS\n";
+                 	result = result + "========================================\n\n";
+                 	if(totalOfficers == 0)
+                 	{
+                 		result = result + "No officers found matching the workload threshold.\n";
+                 	}
+                 	else
+                 	{
+                 		result = result + officerDetails;
+                 	}
+                 	result = result + "========================================\n";
+                 	result = result + "FINAL REPORT SUMMARY\n";
+                 	result = result + "========================================\n";
+                 	result = result + "Officers Matching Criteria : " + totalOfficers + "\n";
+                 	result = result + "Minimum Active Cases       : " + Minimum_Complaints + "\n";
+                 	result = result + "========================================\n";
+                 	result = result + "Generated by Civic Resolve System";
+                 	return result;
+                 }
+				 string Analyze_Overdue_Complaints(int Days_Overdue)
+                 {
+                 	if(Days_Overdue <= 0)
+                 	{
+                 		return "ERROR: Please enter a number greater than 0.";
+                 	}
+                 	overdueCount = 0;
+                 	result = "========================================\n";
+                 	result = result + "          CIVIC RESOLVE\n";
+                 	result = result + "      OVERDUE COMPLAINT REPORT\n";
+                 	result = result + "========================================\n\n";
+                 	result = result + "REPORT SUMMARY\n";
+                 	result = result + "----------------------------------------\n";
+                 	result = result + "Minimum Overdue Days : " + Days_Overdue + "\n";
+                 	result = result + "Report Generated     : " + zoho.currenttime + "\n\n";
+                 	allComplaints = complaint[sla_due_date != null && status != "Closed" && status != "Resolved"];
+                 	complaintDetails = "";
+                 	for each  rec in allComplaints
+                 	{
+                 		overdueDays = rec.sla_due_date.toDate().daysBetween(zoho.currentdate);
+                 		if(overdueDays >= Days_Overdue)
+                 		{
+                 			overdueCount = overdueCount + 1;
+                 			complaintDetails = complaintDetails + "----------------------------------------\n" + "COMPLAINT #" + overdueCount + "\n" + "----------------------------------------\n" + "Complaint ID   : " + rec.ID + "\n" + "Title          : " + rec.complaint_title + "\n" + "Priority       : " + rec.priority + "\n" + "Status         : " + rec.status + "\n" + "SLA Due Date   : " + rec.sla_due_date + "\n" + "Days Overdue   : " + overdueDays + " days\n\n";
+                 		}
+                 	}
+                 	result = result + "OVERDUE COMPLAINT DETAILS\n";
+                 	result = result + "========================================\n\n";
+                 	if(overdueCount == 0)
+                 	{
+                 		result = result + "No overdue complaints found for the selected threshold.\n";
+                 	}
+                 	else
+                 	{
+                 		result = result + complaintDetails;
+                 	}
+                 	result = result + "========================================\n";
+                 	result = result + "FINAL REPORT SUMMARY\n";
+                 	result = result + "========================================\n";
+                 	result = result + "Total Matching Complaints : " + overdueCount + "\n";
+                 	result = result + "Minimum Overdue Threshold : " + Days_Overdue + " days\n";
+                 	result = result + "========================================\n";
+                 	result = result + "Generated by Civic Resolve System";
+                 	return result;
+                 }
+				 string Check_Complaint_Officer_Assignment(string Complaint_Title)
+                 {
+                 	matches = complaint[complaint_title == Complaint_Title];
+                 	if(matches.count() == 0)
+                 	{
+                 		return "COMPLAINT NOT FOUND";
+                 	}
+                 	else if(matches.count() > 1)
+                 	{
+                 		return "MULTIPLE COMPLAINTS FOUND. USE A UNIQUE TITLE.";
+                 	}
+                 	else
+                 	{
+                 		if(matches.assigned_officer == null)
+                 		{
+                 			return "OFFICER NOT ASSIGNED";
+                 		}
+                 		else
+                 		{
+                 			return "OFFICER ASSIGNED";
+                 		}
+                 	}
+                 }
+				 string Check_Complaint_SLA_Status(string Complaint_Title)
+                 {
+                 	matches = complaint[complaint_title == Complaint_Title];
+                 	if(matches.count() == 0)
+                 	{
+                 		return "Complaint Not Found";
+                 	}
+                 	else if(matches.count() > 1)
+                 	{
+                 		return "Multiple Complaints Found. Use a Unique Title.";
+                 	}
+                 	else
+                 	{
+                 		if(matches.sla_due_date == null)
+                 		{
+                 			return "SLA Due Date Not Available";
+                 		}
+                 		else if(matches.sla_due_date < zoho.currenttime)
+                 		{
+                 			return "OVERDUE";
+                 		}
+                 		else
+                 		{
+                 			return "ON TIME";
+                 		}
+                 	}
+                 }
+				 string Check_Department_Readiness(string Department_Name)
+                 {
+                 	dept = department[department_name == Department_Name];
+                 	if(dept.count() == 0)
+                 	{
+                 		return "DEPARTMENT NOT FOUND";
+                 	}
+                 	else if(dept.count() > 1)
+                 	{
+                 		return "MULTIPLE DEPARTMENTS FOUND";
+                 	}
+                 	else if(dept.active_status != "Active")
+                 	{
+                 		return "DEPARTMENT INACTIVE";
+                 	}
+                 	else if(dept.department_head == null)
+                 	{
+                 		return "DEPARTMENT HEAD NOT ASSIGNED";
+                 	}
+                 	else
+                 	{
+                 		head = officer[ID == dept.department_head];
+                 		if(head.count() == 0)
+                 		{
+                 			return "DEPARTMENT HEAD RECORD NOT FOUND";
+                 		}
+                 		else if(head.active_status != "Active")
+                 		{
+                 			return "NO ACTIVE DEPARTMENT HEAD";
+                 		}
+                 		else
+                 		{
+                 			return "DEPARTMENT READY";
+                 		}
+                 	}
+                 }
+			 }
+		 }
+
+
+		workflow
+		{
+		form
+		{
+			Department_Status_Validat as "Department Status Validation"
+			{
+				type =  form
+				form = department
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.department_name == "")
+										{
+											alert "Department name is required.";
+											cancel submit;
+										}
+										if(input.active_status != "Active" && input.active_status != "Inactive")
+										{
+											alert "Please select a valid department status.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Validate_Officer_Assignme as "Validate Officer Assignment"
+			{
+				type =  form
+				form = officer
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.officer_name == null || input.officer_name.trim() == "")
+										{
+											alert "Officer name is required.";
+											cancel submit;
+										}
+										else if(input.email == null || input.email.trim() == "")
+										{
+											alert "Officer email is required.";
+											cancel submit;
+										}
+										else if(!input.email.contains("@") || !input.email.contains("."))
+										{
+											alert "Please enter a valid officer email address.";
+											cancel submit;
+										}
+										else if(input.active_status != "Active" && input.active_status != "Inactive")
+										{
+											alert "Please select a valid officer status.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Validate_Citizen_Details as "Validate Citizen Details"
+			{
+				type =  form
+				form = citizen
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.email == null || input.email.trim() == "")
+										{
+											alert "Citizen email is required.";
+											cancel submit;
+										}
+										else if(!input.email.contains("@") || !input.email.contains("."))
+										{
+											alert "Please enter a valid email address.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Welcome_Citizen as "Welcome Citizen"
+			{
+				type =  form
+				form = citizen
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											sendmail
+										[
+											from :zoho.adminuserid
+											to :input.email
+											subject :"Welcome to Civic Resolve - Citizen Grievance Management"
+											message :"Dear Citizen,\n\nWelcome to Civic Resolve!\n\nCivic Resolve is a citizen grievance management platform designed to make complaint submission, tracking, and resolution more transparent and organized.\n\nThrough this platform, you can submit grievances, track complaint progress, receive status updates, and provide feedback after resolution. Complaints can be routed to the appropriate departments and officers, while evidence verification and closure review support a more accountable resolution process.\n\nOur goal is to make grievance handling easier for citizens and help departments manage complaints systematically.\n\nThank you for joining Civic Resolve. Your voice matters, and we appreciate your trust in our platform.\n\nWarm regards,\nCivic Resolve Team"
+										]
+						)
+					}
+				}
+
+			}
+			Prevent_Duplicate_Registr as "Prevent Duplicate Registration"
+			{
+				type =  form
+				form = citizen
+
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.email != null && input.email != "")
+										{
+											existingCitizen = citizen[email == input.email];
+											if(existingCitizen.count() > 0)
+											{
+												alert "This email is already registered.";
+												cancel submit;
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Validate_Officer_Assignme1 as "Validate Officer Assignment"
+			{
+				type =  form
+				form = complaint
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.assigned_officer != null)
+										{
+											selectedOfficer = officer[ID == input.assigned_officer];
+											if(selectedOfficer.count() == 0)
+											{
+												alert "Please select a valid officer.";
+												cancel submit;
+											}
+											else if(selectedOfficer.active_status != "Active")
+											{
+												alert "Please select an active officer.";
+												cancel submit;
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Log_Complaint_Submission2 as "Log Complaint Submission"
+			{
+				type =  form
+				form = complaint
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											activityID = insert into complaint_activity_log
+										[
+											complaint=input.ID
+											previous_status="Initial"
+											new_status=input.status
+											action_performed="Complaint Submitted"
+											activity_date_time=zoho.currenttime
+											Added_User=zoho.loginuser
+										];
+										info activityID;
+										info "Complaint Submission Workflow Executed Successfully";
+						)
+					}
+				}
+
+			}
+			Log_Status_Changes2 as "Log Status Changes"
+			{
+				type =  form
+				form = complaint
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Get previous activity records
+										logs = complaint_activity_log[complaint == input.ID];
+										latestLogID = 0;
+										previousStatus = "Initial";
+										previousOfficer = null;
+										previousDepartment = null;
+										for each  logRecord in logs
+										{
+											if(logRecord.ID > latestLogID)
+											{
+												latestLogID = logRecord.ID;
+												previousStatus = logRecord.new_status;
+												previousOfficer = logRecord.new_officer;
+												previousDepartment = logRecord.new_department;
+											}
+										}
+										// Identify the type of update
+										actionName = "Complaint Details Updated";
+										if(input.status != previousStatus)
+										{
+											actionName = "Status Changed";
+										}
+										// Save complete complaint history
+										insert into complaint_activity_log
+										[
+											complaint=input.ID
+											previous_status=previousStatus
+											new_status=input.status
+											previous_officer=previousOfficer
+											new_officer=input.assigned_officer
+											previous_department=previousDepartment
+											new_department=input.department
+											action_performed=actionName
+											changed_by=zoho.loginuser
+											activity_date_time=zoho.currenttime
+											Added_User=zoho.loginuser
+										]
+						)
+					}
+				}
+
+			}
+			Notify_Officer_on_Status_ as "Notify Officer on Status Change"
+			{
+				type =  form
+				form = complaint
+
+				record event = on edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.assigned_officer != null)
+										{
+											assigned = officer[ID == input.assigned_officer];
+											if(assigned.count() > 0 && assigned.email != null && assigned.email != "")
+											{
+												sendmail
+												[
+													from :zoho.adminuserid
+													to :assigned.email
+													subject :"Complaint Status Update"
+													message :"Complaint ID: " + input.ID + "\nCurrent Status: " + input.status
+												]
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Auto_Assign_Officer_Befor as "Auto Assign Officer Before Validation"
+			{
+				type =  form
+				form = complaint
+
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.department != null)
+										{
+											for each  deptId in input.department
+											{
+												dept = department[ID == deptId];
+												if(dept.count() > 0 && dept.department_head != null)
+												{
+													for each  officerId in dept.department_head
+													{
+														head = officer[ID == officerId];
+														if(head.count() > 0 && head.active_status == "Active")
+														{
+															input.assigned_officer = head.ID;
+															break;
+														}
+													}
+												}
+												if(input.assigned_officer != null)
+												{
+													break;
+												}
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Prevent_Deactivation_of_A as "Prevent Deactivation of Assigned Officer"
+			{
+				type =  form
+				form = officer
+
+				record event = on edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.active_status == "Inactive")
+										{
+											assignedComplaints = complaint[assigned_officer == input.ID && status != "Resolved" && status != "Closed"];
+											if(assignedComplaints.count() > 0)
+											{
+												alert "This officer has pending complaints assigned. Reassign those complaints before deactivating the officer.";
+												cancel submit;
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Validate_Evidence as "Validate Evidence"
+			{
+				type =  form
+				form = resolution_evidence
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.complaint == null)
+										{
+											alert "Please select a complaint for this evidence.";
+											cancel submit;
+										}
+										else if(input.evidence_type == null || input.evidence_type.trim() == "")
+										{
+											alert "Please select an evidence type.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Initialize_Evidence as "Initialize Evidence"
+			{
+				type =  form
+				form = resolution_evidence
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.verification_status == null || input.verification_status == "")
+										{
+											input.verification_status = "Pending";
+										}
+						)
+					}
+				}
+
+			}
+			Notify_Evidence_Reviewer as "Notify Evidence Reviewer"
+			{
+				type =  form
+				form = resolution_evidence
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											sendmail
+										[
+											from :zoho.adminuserid
+											to :"prasanna.k.2024.cse@rajalakshmi.edu.in"
+											subject :"Civic Resolve - New Evidence Submitted for Review"
+											message :"Dear Evidence Reviewer,\n\n" + "A new evidence record has been submitted to the Civic Resolve Grievance Management System. Your review is requested.\n\n" + "==================================================\n" + "                 EVIDENCE DETAILS\n" + "==================================================\n\n" + "Evidence Record ID: " + input.ID + "\n" + "Related Complaint: " + input.complaint + "\n" + "Verification Status: " + input.verification_status + "\n\n" + "==================================================\n" + "                  ACTION REQUIRED\n" + "==================================================\n\n" + "Please open Civic Resolve, review the submitted evidence, and update its verification status after completing your assessment.\n\n" + "This is an automated notification generated when new evidence is submitted. Please do not reply directly to this email.\n\n" + "Regards,\n" + "Civic Resolve Team\n" + "Citizen Grievance Management System"
+										]
+						)
+					}
+				}
+
+			}
+			Validate_Citizen_Feedback as "Validate Citizen Feedback"
+			{
+				type =  form
+				form = citizen_feedback
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.complaint == null || input.complaint.isEmpty())
+										{
+											alert "Please select a complaint.";
+											cancel submit;
+										}
+										else if(input.rating == null || input.rating < 1 || input.rating > 5)
+										{
+											alert "Please provide a rating between 1 and 5.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Notify_Feedback_Received as "Notify Feedback Received"
+			{
+				type =  form
+				form = citizen_feedback
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											sendmail
+										[
+											from :zoho.adminuserid
+											to :"prasanna.k.2024.cse@rajalakshmi.edu.in"
+											subject :"Civic Resolve - Feedback Received | " + input.ID
+											message :"Dear Citizen,\n\n" + "Thank you for submitting feedback through Civic Resolve. Your feedback has been successfully recorded.\n\n" + "==================================================\n" + "                 FEEDBACK DETAILS\n" + "==================================================\n\n" + "Feedback ID: " + input.ID + "\n" + "Related Complaint: " + input.complaint + "\n" + "Rating: " + input.rating + " out of 5\n\n" + "Your feedback helps us assess the grievance handling process and improve our services. We appreciate your time and contribution.\n\n" + "This is an automated confirmation from Civic Resolve.\n\n" + "Regards,\n" + "Civic Resolve Team\n" + "Citizen Grievance Management System"
+										]
+										info "Feedback workflow executed successfully";
+						)
+					}
+				}
+
+			}
+			Capture_Previous_Evidence as "Capture Previous Evidence Status"
+			{
+				type =  form
+				form = resolution_evidence
+
+				record event = on edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											oldStatus = old.verification_status;
+										insert into complaint_activity_log
+										[
+											complaint=input.complaint
+											previous_status=oldStatus
+											new_status=input.verification_status
+											action_performed="Evidence Verification Updated"
+											changed_by=zoho.loginuser
+											activity_date_time=zoho.currenttime
+											Added_User=zoho.loginuser
+										]
+						)
+					}
+				}
+
+			}
+			Set_Submission_Date_and_C as "Set Submission Date and Calculate SLA Deadline"
+			{
+				type =  form
+				form = complaint
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Automatically set submission date and time
+										if(input.submission_date_time == null)
+										{
+											input.submission_date_time = zoho.currenttime;
+										}
+										// Automatically calculate SLA due date if not entered
+										if(input.sla_due_date == null)
+										{
+											input.sla_due_date = input.submission_date_time.addDay(1);
+										}
+						)
+					}
+				}
+
+			}
+			Process_Closure_Review as "Process Closure Review"
+			{
+				type =  form
+				form = closure_review
+
+				record event = on add or edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.complaint_selection != null)
+										{
+											complaint_id = input.complaint_selection.toLong();
+											if(input.review_status == "Approved")
+											{
+												try 
+												{
+													// Move the Blueprint stage to "Closed"
+													thisapp.blueprint.changeStage("complaint","complaint_lifecycle_management","Closed",complaint_id);
+												}		catch (e)
+												{
+													// Fallback direct update if Blueprint is inactive
+													update complaint[ID == complaint_id]
+													[
+														status="Closed"
+													];
+												}
+											}
+											else if(input.review_status == "Rejected")
+											{
+												try 
+												{
+													// Move the Blueprint stage to "Under Review"
+													thisapp.blueprint.changeStage("complaint","complaint_lifecycle_management","Under Review",complaint_id);
+												}		catch (e)
+												{
+													// Fallback direct update if Blueprint is inactive
+													update complaint[ID == complaint_id]
+													[
+														status="Under Review"
+													];
+												}
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Notify_Closure_Decision as "Notify Closure Decision"
+			{
+				type =  form
+				form = closure_review
+
+				record event = on add or edit
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											sendmail
+										[
+											from :zoho.adminuserid
+											to :"prasanna.k.2024.cse@rajalakshmi.edu.in"
+											subject :"Civic Resolve - Closure Review Decision | " + input.ID
+											message :"Dear Reviewer,\n\n" + "A closure review decision has been recorded in Civic Resolve.\n\n" + "==================================================\n" + "             CLOSURE REVIEW DETAILS\n" + "==================================================\n\n" + "Review Record ID: " + input.ID + "\n" + "Related Complaint: " + input.complaint_selection + "\n" + "Review Status: " + input.review_status + "\n" + "Review Reason: " + input.review_reason + "\n" + "Review Remarks: " + input.review_remarks + "\n\n" + "==================================================\n" + "                 NEXT ACTION\n" + "==================================================\n\n" + "Please review the decision and ensure the appropriate follow-up is completed. An approved review should result in complaint closure, while a rejected review may require further action.\n\n" + "This is an automated notification from Civic Resolve.\n\n" + "Regards,\n" + "Civic Resolve Team\n" + "Citizen Grievance Management System"
+										]
+						)
+					}
+				}
+
+			}
+			Validate_Activity_Log as "Validate Activity Log"
+			{
+				type =  form
+				form = complaint_activity_log
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.complaint == null)
+										{
+											alert "Please select a complaint for this activity log.";
+											cancel submit;
+										}
+										else if(input.new_status == null || input.new_status.trim() == "")
+										{
+											alert "New status is required.";
+											cancel submit;
+										}
+										else if(input.action_performed == null || input.action_performed.trim() == "")
+										{
+											alert "Action performed is required.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Create_CRM_Contact as "Create_CRM_Contact"
+			{
+				type =  form
+				form = citizen
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											contactMap = Map();
+										contactMap.put("Last_Name",input.citizen_name);
+										contactMap.put("Email",input.email);
+										contactMap.put("Phone",input.mobile_number);
+										contactMap.put("Mobile",input.mobile_number);
+										contactMap.put("Mailing_Street",input.address);
+										contactMap.put("Mailing_Zip",input.postal_code1);
+										response = zoho.crm.createRecord("Contacts",contactMap);
+										if(response.get("id") != null)
+										{
+											crmID = response.get("id").toString();
+											update citizen[ID == input.ID]
+											[
+												crm_contact_id=crmID
+											];
+											info "CRM Contact created successfully. ID: " + crmID;
+										}
+										else
+										{
+											info "CRM Contact creation failed: " + response;
+										}
+						)
+					}
+				}
+
+			}
+			Create_CRM_Case as "Create_CRM_Case"
+			{
+				type =  form
+				form = complaint
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											caseMap = Map();
+										caseMap.put("Subject",input.complaint_title);
+										caseMap.put("Description",input.complaint_description);
+										citizenRecord = citizen[ID == input.citizen];
+										if(citizenRecord.crm_contact_id != null && citizenRecord.crm_contact_id != "")
+										{
+											caseMap.put("Contact_Name",{"id":citizenRecord.crm_contact_id});
+											info "CRM Contact ID: " + citizenRecord.crm_contact_id;
+											info "Case Map: " + caseMap;
+											response = zoho.crm.createRecord("Cases",caseMap);
+											if(response.get("id") != null)
+											{
+												crmID = response.get("id").toString();
+												update complaint[ID == input.ID]
+												[
+													crm_case_id1=crmID
+												];
+												info "CRM Case created successfully. ID: " + crmID;
+											}
+											else
+											{
+												info "CRM Case creation failed: " + response;
+											}
+										}
+										else
+										{
+											info "CRM Contact ID not found. Cannot link this Case.";
+										}
+						)
+					}
+				}
+
+			}
+		}
+
+		schedule
+		{
+			SLA_Escalation_with_Email as "SLA Escalation with Email"
+			{
+				type =  schedule
+				start = "2026-11-08 15:00:00"
+				frequency = daily
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						// Get all active complaints
+										allComplaints = complaint[sla_due_date != null && status != "Closed" && status != "Resolved"];
+										for each  rec in allComplaints
+										{
+											if(rec.assigned_officer != null)
+											{
+												officerRec = officer[ID == rec.assigned_officer];
+												if(officerRec.count() > 0 && officerRec.email != null && officerRec.email != "")
+												{
+													// CASE 1: SLA deadline approaching within 24 hours
+													if(rec.sla_due_date > zoho.currenttime && rec.sla_due_date <= zoho.currenttime.addDay(1))
+													{
+														warningLog = complaint_activity_log[complaint == rec.ID && action_performed == "SLA Warning Email Sent"];
+														if(warningLog.count() == 0)
+														{
+															sendmail
+															[
+																from :zoho.adminuserid
+																to :officerRec.email
+																subject :"SLA Warning: Complaint Due Soon"
+																message :"Dear Officer,<br><br>The SLA deadline for this complaint is approaching.<br><br><b>Complaint:</b> " + rec.complaint_title + "<br><b>SLA Due Date:</b> " + rec.sla_due_date + "<br><b>Priority:</b> " + rec.priority + "<br><b>Status:</b> " + rec.status + "<br><br>Please take action before the deadline.<br><br>Civic Resolve System"
+															]
+															insert into complaint_activity_log
+															[
+																complaint=rec.ID
+																previous_status=rec.status
+																new_status=rec.status
+																action_performed="SLA Warning Email Sent"
+																changed_by=zoho.loginuser
+																activity_date_time=zoho.currenttime
+																Added_User=zoho.loginuser
+															]
+														}
+													}
+													// CASE 2: SLA deadline has passed
+													else if(rec.sla_due_date <= zoho.currenttime && rec.priority != "Critical")
+													{
+														oldPriority = rec.priority;
+														update complaint[ID == rec.ID]
+														[
+															priority="Critical"
+														];
+														insert into complaint_activity_log
+														[
+															complaint=rec.ID
+															previous_status=rec.status
+															new_status=rec.status
+															action_performed="SLA Breach - Priority escalated from " + oldPriority + " to Critical"
+															changed_by=zoho.loginuser
+															activity_date_time=zoho.currenttime
+															Added_User=zoho.loginuser
+														]
+														sendmail
+														[
+															from :zoho.adminuserid
+															to :officerRec.email
+															subject :"URGENT: SLA Breached - Critical Complaint"
+															message :"Dear Officer,<br><br>The SLA deadline for this complaint has been breached. Its priority has automatically been escalated to CRITICAL.<br><br><b>Complaint:</b> " + rec.complaint_title + "<br><b>Previous Priority:</b> " + oldPriority + "<br><b>New Priority:</b> Critical<br><b>SLA Due Date:</b> " + rec.sla_due_date + "<br><b>Status:</b> " + rec.status + "<br><br>Please take immediate action.<br><br>Civic Resolve System"
+														]
+													}
+												}
+											}
+										}
+					)
+					}
+				}
+			}
+			Auto_Close_Resolved_Compl as "Auto_Close_Resolved_Complaints"
+			{
+				type =  schedule
+				start = "2026-11-08 15:20:00"
+				frequency = daily
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						resolvedComplaints = complaint[status == "Resolved" && resolution_date != null && resolution_date <= zoho.currenttime.addDay(-7)];
+										for each  rec in resolvedComplaints
+										{
+											update complaint[ID == rec.ID]
+											[
+												status="Closed"
+											];
+											insert into complaint_activity_log
+											[
+												complaint=rec.ID
+												previous_status="Resolved"
+												new_status="Closed"
+												action_performed="Automatically Closed After 7 Days of Resolution"
+												changed_by=zoho.loginuser
+												activity_date_time=zoho.currenttime
+												Added_User=zoho.loginuser
+											]
+											if(rec.citizen != null)
+											{
+												citizenRec = citizen[ID == rec.citizen];
+												if(citizenRec.count() > 0 && citizenRec.email != null && citizenRec.email != "")
+												{
+													sendmail
+													[
+														from :zoho.adminuserid
+														to :citizenRec.email
+														subject :"Your Civic Complaint Has Been Closed"
+														message :"Dear Citizen,<br><br>Your complaint has remained in Resolved status for 7 days and has now been automatically marked as Closed.<br><br><b>Complaint:</b> " + rec.complaint_title + "<br><b>Previous Status:</b> Resolved<br><b>Current Status:</b> Closed<br><br>Thank you for using Civic Resolve. If the issue is still unresolved, please contact the concerned department.<br><br>Regards,<br>Civic Resolve Team"
+													]
+												}
+											}
+										}
+					)
+					}
+				}
+			}
+			Daily_Executive_Grievance as "Daily_Executive_Grievance_Digest"
+			{
+				type =  schedule
+				start = "2026-11-08 15:40:00"
+				frequency = daily
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						todayDate = zoho.currentdate.toString("yyyy-MM-dd");
+										// Complaint statistics
+										totalComplaints = 0;
+										pendingCount = 0;
+										inProgressCount = 0;
+										resolvedCount = 0;
+										closedCount = 0;
+										allComplaints = complaint[submission_date_time != null];
+										for each  rec in allComplaints
+										{
+											if(rec.submission_date_time.toString("yyyy-MM-dd") == todayDate)
+											{
+												totalComplaints = totalComplaints + 1;
+												if(rec.status == "Pending")
+												{
+													pendingCount = pendingCount + 1;
+												}
+												else if(rec.status == "In Progress")
+												{
+													inProgressCount = inProgressCount + 1;
+												}
+												else if(rec.status == "Resolved")
+												{
+													resolvedCount = resolvedCount + 1;
+												}
+												else if(rec.status == "Closed")
+												{
+													closedCount = closedCount + 1;
+												}
+											}
+										}
+										// Citizen feedback statistics
+										totalFeedback = 0;
+										ratingTotal = 0;
+										averageRating = 0;
+										allFeedback = citizen_feedback[submitted_date != null];
+										for each  feedbackRec in allFeedback
+										{
+											if(feedbackRec.submitted_date.toString("yyyy-MM-dd") == todayDate)
+											{
+												totalFeedback = totalFeedback + 1;
+												if(feedbackRec.rating != null)
+												{
+													ratingTotal = ratingTotal + feedbackRec.rating;
+												}
+											}
+										}
+										if(totalFeedback > 0)
+										{
+											averageRating = ratingTotal / totalFeedback;
+										}
+										// Prepare daily executive email
+										emailMessage = "<h2>Daily Civic Resolve Executive Report</h2>";
+										emailMessage = emailMessage + "<b>Date:</b> " + todayDate + "<br><br>";
+										emailMessage = emailMessage + "<h3>Complaint Summary</h3>";
+										emailMessage = emailMessage + "Total Complaints Today: " + totalComplaints + "<br>";
+										emailMessage = emailMessage + "Pending: " + pendingCount + "<br>";
+										emailMessage = emailMessage + "In Progress: " + inProgressCount + "<br>";
+										emailMessage = emailMessage + "Resolved: " + resolvedCount + "<br>";
+										emailMessage = emailMessage + "Closed: " + closedCount + "<br><br>";
+										emailMessage = emailMessage + "<h3>Citizen Feedback Summary</h3>";
+										emailMessage = emailMessage + "Total Feedback Today: " + totalFeedback + "<br>";
+										emailMessage = emailMessage + "Average Rating: " + averageRating + " / 5<br><br>";
+										emailMessage = emailMessage + "Regards,<br>Civic Resolve System";
+										// Send daily report
+										sendmail
+										[
+											from :zoho.adminuserid
+											to :"prasanna.k.2024.cse@rajalakshmi.edu.in"
+											subject :"Daily Civic Resolve Executive Report"
+											message :emailMessage
+										]
+					)
+					}
+				}
+			}
+			Executive_Intelligence_Da as "Executive_Intelligence_Dashboard"
+			{
+				type =  schedule
+				start = "2026-11-08 17:35:00"
+				frequency = daily
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						allComplaints = complaint[ID != 0];
+										allDepartments = department[ID != 0];
+										allActivityLogs = complaint_activity_log[ID != 0];
+										totalComplaints = allComplaints.count();
+										activeComplaints = 0;
+										resolvedComplaints = 0;
+										closedComplaints = 0;
+										overdueComplaints = 0;
+										atRiskComplaints = 0;
+										unassignedComplaints = 0;
+										duplicateFlags = 0;
+										departmentCount = 0;
+										todayDate = zoho.currentdate;
+										riskLimit = todayDate.addDay(2);
+										for each  rec in allComplaints
+										{
+											if(rec.status == "Resolved")
+											{
+												resolvedComplaints = resolvedComplaints + 1;
+											}
+											else if(rec.status == "Closed")
+											{
+												closedComplaints = closedComplaints + 1;
+											}
+											else
+											{
+												activeComplaints = activeComplaints + 1;
+												if(rec.assigned_officer == null)
+												{
+													unassignedComplaints = unassignedComplaints + 1;
+												}
+												if(rec.sla_due_date != null)
+												{
+													dueDate = rec.sla_due_date.toDate();
+													if(dueDate < todayDate)
+													{
+														overdueComplaints = overdueComplaints + 1;
+													}
+													else if(dueDate <= riskLimit)
+													{
+														atRiskComplaints = atRiskComplaints + 1;
+													}
+												}
+											}
+										}
+										// Duplicate detection summary
+										for each  logRec in allActivityLogs
+										{
+											if(logRec.action_performed != null && logRec.action_performed.contains("Possible Duplicate Complaint"))
+											{
+												duplicateFlags = duplicateFlags + 1;
+											}
+										}
+										// Department performance analysis
+										departmentReport = "";
+										for each  dept in allDepartments
+										{
+											deptTotal = 0;
+											deptResolved = 0;
+											deptClosed = 0;
+											deptActive = 0;
+											deptOverdue = 0;
+											for each  rec in allComplaints
+											{
+												if(rec.department == dept.ID)
+												{
+													deptTotal = deptTotal + 1;
+													if(rec.status == "Resolved")
+													{
+														deptResolved = deptResolved + 1;
+													}
+													else if(rec.status == "Closed")
+													{
+														deptClosed = deptClosed + 1;
+													}
+													else
+													{
+														deptActive = deptActive + 1;
+														if(rec.sla_due_date != null && rec.sla_due_date.toDate() < todayDate)
+														{
+															deptOverdue = deptOverdue + 1;
+														}
+													}
+												}
+											}
+											if(deptTotal > 0)
+											{
+												departmentCount = departmentCount + 1;
+												completionRate = ((deptResolved + deptClosed) * 100.0) / deptTotal;
+												departmentReport = departmentReport + "\nDepartment: " + dept.department_name + "\nTotal: " + deptTotal + " | Active: " + deptActive + " | Resolved: " + deptResolved + " | Closed: " + deptClosed + " | Overdue: " + deptOverdue + "\nCompletion Rate: " + completionRate + "%" + "\n--------------------------------";
+											}
+										}
+										// Generate executive report
+										executiveReport = "\n================================" + "\nCIVIC RESOLVE" + "\nEXECUTIVE INTELLIGENCE DASHBOARD" + "\n================================" + "\nReport Date: " + todayDate + "\n\nOVERALL COMPLAINT SUMMARY" + "\nTotal Complaints: " + totalComplaints + "\nActive Complaints: " + activeComplaints + "\nResolved Complaints: " + resolvedComplaints + "\nClosed Complaints: " + closedComplaints + "\n\nSLA PERFORMANCE" + "\nSLA Breached: " + overdueComplaints + "\nSLA At Risk (Next 2 Days): " + atRiskComplaints + "\nUnassigned Complaints: " + unassignedComplaints + "\n\nDUPLICATE DETECTION" + "\nExisting Duplicate Flags: " + duplicateFlags + "\n\nDEPARTMENT PERFORMANCE" + "\nDepartments Analyzed: " + departmentCount + "\n" + departmentReport + "\n================================" + "\nEXECUTIVE ANALYSIS COMPLETED" + "\n================================";
+										// Send executive report by email
+										sendmail
+										[
+											from :zoho.adminuserid
+											to :zoho.adminuserid
+											subject :"Civic Resolve - Daily Executive Intelligence Report"
+											message :executiveReport
+										]
+										info "Executive Intelligence Report generated and email sent to administrator.";
+										info executiveReport;
+					)
+					}
+				}
+			}
+		}
+
+		approval
+		{
+			Civic_Resolve_Smart_Appro as "Civic_Resolve_Smart_Approval"
+			{
+				type =  approval
+				form = closure_review[review_status == "Pending"]
+				display fields = [complaint_selection,requested_by,review_reason,review_description,evidence_attachment,review_status,assigned_reviewer]
+				on start
+				{
+				}
+				on level 1
+				{
+					approvers
+					(
+			 			role = "Department Head"
+					)
+					on approve 
+					{
+						actions 
+						{
+							sendmail
+							(
+								from : zoho.loginuserid
+								to : approver.submitter
+								subject : "Approval Request"
+								message : "Your request has been approved."
+							)
+						}
+					}
+					on reject
+					{
+
+						actions 
+						{
+							sendmail
+							(
+								from : zoho.loginuserid
+								to : approver.submitter
+								subject : "Approval Request"
+								message : "Your request has been rejected."
+							)
+						}
+						actions 
+						{
+						update closure_review[ID == input.ID]
+						[
+							review_status = "Rejected"
+						]
+						}
+					}
+				}
+				on level 2
+				{
+					approvers
+					(
+			 			role = "System Administrator"
+					)
+					on approve 
+					{
+		    			display name = "Final Approve"
+						actions 
+						{
+							sendmail
+							(
+								from : zoho.loginuserid
+								to : approver.submitter
+								subject : "Approval Request"
+								message : "Your request has been approved."
+							)
+						}
+						actions 
+						{
+						update closure_review[ID == input.ID]
+						[
+							review_status = "Approved"
+						]
+						}
+						actions 
+						{
+						on load
+						(
+							if(input.complaint_selection != null)
+												{
+													complaint_id = input.complaint_selection.toLong();
+													// Update complaint status
+													update complaint[ID == complaint_id]
+													[
+														status="Closed"
+													];
+													// Add activity log
+													insert into complaint_activity_log
+													[
+														complaint=complaint_id
+														previous_status="Under Review"
+														new_status="Closed"
+														action_performed="Final Closure Approved"
+														remarks="Closure request approved by Department Head and System Administrator."
+														changed_by=zoho.loginuser
+														activity_date_time=zoho.currenttime
+														Added_User=zoho.loginuser
+													]
+												}
+						)
+						}
+					}
+					on reject
+					{
+
+						actions 
+						{
+							sendmail
+							(
+								from : zoho.loginuserid
+								to : approver.submitter
+								subject : "Approval Request"
+								message : "Your request has been rejected."
+							)
+						}
+						actions 
+						{
+						update closure_review[ID == input.ID]
+						[
+							review_status = "Rejected"
+						]
+						}
+					}
+				}
+			}
+		}
+
+		blueprint
+		{
+    			resolution_evidence_verification as "Resolution Evidence Verification"
+    			{
+        			type = Blueprint
+        			form = resolution_evidence
+        			start
+        			{
+            			start stage = "Pending"
+            			chart data
+            			{
+                			from port : B
+                			to port   : T3
+                			position  : "0 0"
+                			path      : [27.849999999999994,36.84,27.849999999999994,46.84,27.849999999999994,105.92,46.870553081204555,105.92,46.870553081204555,165,46.870553081204555,175]
+            			}
+        			}
+        			stages
+        			{
+           			"Verified"
+           			{
+               			chart data
+               			{
+                   			position : "275 350"
+               			}
+           			}
+           			"Rejected"
+           			{
+               			chart data
+               			{
+                   			position : "-275 350"
+               			}
+           			}
+           			"Pending"
+           			{
+               			chart data
+               			{
+                   			position : "0 175"
+               			}
+           			}
+        			}
+        			transitions
+        			{
+    				pending_to_rejected as "Reject Evidence"
+    				{
+         				type = normal
+         				from stage = "Pending"
+         				to stage = "Rejected"
+         				before
+         				{
+            				transition owner
+            				(
+                				permissions = {"Administrator", "Department Head"}
+             				)
+            				confirmation before execution
+            				(
+                				message = "Are you sure you want to reject this evidence?"
+                				confirm button text = "Reject Evidence"
+                				cancel button text = "Cancel"
+            				)
+         				}
+         				after
+         				{
+							actions 
+							{
+								custom deluge script
+								(
+															input.verification_status = "Rejected";
+								)
+							}
+         				}
+         				chart data
+         				{
+             				from port : L1
+             				to port   : T3
+             				path      : [0,200.8039148976108,-10,200.8039148976108,-226.21494954330717,200.8039148976108,-226.21494954330717,270.40195744880543,-226.21494954330717,340,-226.21494954330717,350]
+        				}
+  				}
+    				pending_to_verified as "Verify Evidence"
+    				{
+         				type = normal
+         				from stage = "Pending"
+         				to stage = "Verified"
+         				before
+         				{
+            				transition owner
+            				(
+                				permissions = {"Administrator", "Department Head"}
+             				)
+            				confirmation before execution
+            				(
+                				message = "Are you sure you want to verify this evidence?"
+                				confirm button text = "Verify Evidence"
+                				cancel button text = "Cancel"
+            				)
+         				}
+         				after
+         				{
+							actions 
+							{
+								custom deluge script
+								(
+															input.verification_status = "Verified";
+								)
+							}
+         				}
+         				chart data
+         				{
+             				from port : R1
+             				to port   : T3
+             				path      : [93.74110616240911,200.8039148976108,103.74110616240911,200.8039148976108,320.8660517384311,200.8039148976108,320.8660517384311,270.40195744880543,320.8660517384311,340,320.8660517384311,350]
+        				}
+  				}
+    				rejected_to_pending as "Resubmit for Verification"
+    				{
+         				type = normal
+         				from stage = "Rejected"
+         				to stage = "Pending"
+         				before
+         				{
+            				transition owner
+            				(
+                				permissions = {"Administrator", "Department Head", "Grievance Officer", "Citizen"}
+             				)
+            				confirmation before execution
+            				(
+                				message = "Are you sure you want to resubmit this evidence for verification?"
+                				confirm button text = "Resubmit Evidence"
+                				cancel button text = "Cancel"
+            				)
+         				}
+         				after
+         				{
+							actions 
+							{
+								custom deluge script
+								(
+															input.verification_status = "Pending";
+								)
+							}
+         				}
+         				chart data
+         				{
+             				from port : B3
+             				to port   : B1
+             				path      : [-226.21494954330717,401.6078297952216,-226.21494954330717,411.6078297952216,21.956851027068183,411.6078297952216,21.956851027068183,324.1078297952216,21.956851027068183,236.60782979522162,21.956851027068183,226.60782979522162]
+        				}
+  				}
+        			}
+    			}
+    			complaint_lifecycle_management as "Complaint Lifecycle Management"
+    			{
+        			type = Blueprint
+        			form = complaint
+        			status = inactive
+        			start
+        			{
+            			start stage = "Submitted"
+            			chart data
+            			{
+                			from port : B
+                			to port   : T3
+                			position  : "0 0"
+                			path      : [27.849999999999994,36.84,27.849999999999994,46.84,27.849999999999994,105.92,53.47154337661471,105.92,53.47154337661471,165,53.47154337661471,175]
+            			}
+        			}
+        			stages
+        			{
+           			"Assigned"
+           			{
+               			chart data
+               			{
+                   			position : "0 350"
+               			}
+           			}
+           			"Submitted"
+           			{
+               			chart data
+               			{
+                   			position : "0 175"
+               			}
+           			}
+           			"Under Review"
+           			{
+               			chart data
+               			{
+                   			position : "284.44500000000005 719.845"
+               			}
+           			}
+           			"Closed"
+           			{
+               			chart data
+               			{
+                   			position : "0 1050"
+               			}
+           			}
+           			"In Progress"
+           			{
+               			chart data
+               			{
+                   			position : "0 525"
+               			}
+           			}
+           			"Resolved"
+           			{
+               			chart data
+               			{
+                   			position : "0 875"
+               			}
+           			}
+        			}
+        			transitions
+        			{
+    				assign_complaint as "Assign Complaint"
+    				{
+         				type = normal
+         				from stage = "Submitted"
+         				to stage = "Assigned"
+         				before
+         				{
+            				transition owner
+            				(
+                				userfields = {assigned_officer}
+             				)
+            				confirmation before execution
+            				(
+                				message = "Are you sure you want to assign this complaint?"
+                				confirm button text = "Assign"
+                				cancel button text = "Cancel"
+            				)
+         				}
+         				after
+         				{
+							actions 
+							{
+								custom deluge script
+								(
+															// Update the status field of the current complaint record to "Assigned"
+														input.status = "Assigned";
+								)
+							}
+         				}
+         				chart data
+         				{
+             				from port : B3
+             				to port   : T3
+             				path      : [53.47154337661471,226.60782979522162,53.47154337661471,236.60782979522162,53.47154337661471,288.3039148976108,49.74755198257174,288.3039148976108,49.74755198257174,340,49.74755198257174,350]
+        				}
+  				}
+    				close_complaint as "Close Complaint"
+    				{
+         				type = normal
+         				from stage = "Resolved"
+         				to stage = "Closed"
+         				before
+         				{
+            				confirmation before execution
+            				(
+                				message = "Are you sure you want to close this complaint?"
+                				confirm button text = "Close"
+                				cancel button text = "Cancel"
+            				)
+         				}
+         				after
+         				{
+							actions 
+							{
+								custom deluge script
+								(
+															// Update the status field to "Closed" for the current complaint record
+														input.status = "Closed";
+								)
+							}
+         				}
+         				chart data
+         				{
+             				from port : B3
+             				to port   : T3
+             				path      : [49.740548198392055,926.6078297952216,49.740548198392055,936.6078297952216,49.740548198392055,988.3039148976109,43.04854685561862,988.3039148976109,43.04854685561862,1040,43.04854685561862,1050]
+        				}
+  				}
+    				mark_resolved as "Mark Resolved"
+    				{
+         				type = normal
+         				from stage = "Under Review"
+         				to stage = "Resolved"
+         				before
+         				{
+            				confirmation before execution
+            				(
+                				message = "Are you sure you want to mark this complaint as resolved?"
+                				confirm button text = "Mark Resolved"
+                				cancel button text = "Cancel"
+            				)
+         				}
+         				after
+         				{
+							actions 
+							{
+								custom deluge script
+								(
+															// Update the status field to "Resolved" for the current complaint record
+														input.status = "Resolved";
+														// Optionally, set the resolution date to current date
+														input.resolution_date = zoho.currentdate;
+								)
+							}
+         				}
+         				chart data
+         				{
+             				from port : B3
+             				to port   : T3
+             				path      : [349.68353403823585,771.4528297952216,349.68353403823585,781.4528297952216,349.68353403823585,823.2264148976108,49.740548198392055,823.2264148976108,49.740548198392055,865,49.740548198392055,875]
+        				}
+  				}
+    				reopen_complaint as "Reopen Complaint"
+    				{
+         				type = normal
+         				from stage = "Resolved"
+         				to stage = "In Progress"
+         				before
+         				{
+            				transition owner
+            				(
+                				permissions = {"Administrator", "Department Head"}
+             				)
+            				confirmation before execution
+            				(
+                				message = "Are you sure you want to reopen this complaint?"
+                				confirm button text = "Reopen"
+                				cancel button text = "Cancel"
+            				)
+         				}
+         				during
+         				{
+            				action = update_fields
+            				workflow status = true
+            				visible fields = [resolution_description]
+         				}
+         				after
+         				{
+							actions 
+							{
+								custom deluge script
+								(
+															// Update the status field to "In Progress" for the current complaint record
+														input.status = "In Progress";
+								)
+							}
+         				}
+         				chart data
+         				{
+             				from port : L1
+             				to port   : B2
+             				path      : [0,900.8039148976108,-10,900.8039148976108,-10,726.8039148976109,40.50369839202699,726.8039148976109,40.50369839202699,586.6078297952216,40.50369839202699,576.6078297952216]
+        				}
+  				}
+    				return_for_rework as "Return for Rework"
+    				{
+         				type = normal
+         				from stage = "Under Review"
+         				to stage = "In Progress"
+         				before
+         				{
+            				confirmation before execution
+            				(
+                				message = "Are you sure you want to return this complaint for rework?"
+                				confirm button text = "Return"
+                				cancel button text = "Cancel"
+            				)
+         				}
+         				after
+         				{
+							actions 
+							{
+								custom deluge script
+								(
+															input.status = "In Progress";
+								)
+							}
+         				}
+         				chart data
+         				{
+             				from port : L1
+             				to port   : T1
+             				path      : [284.44500000000005,745.6489148976108,274.44500000000005,745.6489148976108,197.2280475880405,745.6489148976108,197.2280475880405,515,25.001849196013495,515,25.001849196013495,525]
+        				}
+  				}
+    				start_work as "Start Work"
+    				{
+         				type = normal
+         				from stage = "Assigned"
+         				to stage = "In Progress"
+         				before
+         				{
+            				transition owner
+            				(
+                				userfields = {assigned_officer}
+             				)
+            				confirmation before execution
+            				(
+                				message = "Are you sure you want to start work on this complaint?"
+                				confirm button text = "Start Work"
+                				cancel button text = "Cancel"
+            				)
+         				}
+         				after
+         				{
+							actions 
+							{
+								custom deluge script
+								(
+															// Update the status field to "In Progress" for the current complaint record
+														input.status = "In Progress";
+								)
+							}
+         				}
+         				chart data
+         				{
+             				from port : B3
+             				to port   : T3
+             				path      : [49.74755198257174,401.6078297952216,49.74755198257174,411.6078297952216,49.74755198257174,463.3039148976108,56.00554758804049,463.3039148976108,56.00554758804049,515,56.00554758804049,525]
+        				}
+  				}
+    				submit_for_review as "Submit for Review"
+    				{
+         				type = normal
+         				from stage = "In Progress"
+         				to stage = "Under Review"
+         				before
+         				{
+            				confirmation before execution
+            				(
+                				message = "Are you sure you want to submit this complaint for review?"
+                				confirm button text = "Submit"
+                				cancel button text = "Cancel"
+            				)
+         				}
+         				after
+         				{
+							actions 
+							{
+								custom deluge script
+								(
+															// Update the status field of the current complaint record to "Under Review"
+														input.status = "Under Review";
+								)
+							}
+         				}
+         				chart data
+         				{
+             				from port : B3
+             				to port   : T3
+             				path      : [56.00554758804049,576.6078297952216,56.00554758804049,586.6078297952216,56.00554758804049,648.2264148976108,349.68353403823585,648.2264148976108,349.68353403823585,709.845,349.68353403823585,719.845]
+        				}
+  				}
+        			}
+    			}
+		}
+
+		batchworkflow
+		{
+			Central_Complaint_Intelli
+			{
+    			display name = "Central_Complaint_Intelligence_Engine"
+    			type = batchworkflow
+    			form = complaint
+    			event = "On Schedule"
+    			start = "08-Nov-2026 14:20:00"
+    			frequency = daily
+    			batch size = 1000
+    			status = active
+    			on execute 
+    			{
+					actions 
+					{
+						custom deluge script
+						(
+											activeComplaints = complaint[status != "Closed" && status != "Resolved"];
+										processedCount = 0;
+										overdueCount = 0;
+										upcomingCount = 0;
+										unassignedCount = 0;
+										reportDate = zoho.currentdate.toString("yyyy-MM-dd");
+										for each  rec in activeComplaints
+										{
+											riskLevel = "Normal";
+											issueDetails = "";
+											// Check SLA deadline
+											if(rec.sla_due_date == null)
+											{
+												riskLevel = "SLA Not Configured";
+												issueDetails = "SLA due date is missing";
+											}
+											else if(rec.sla_due_date <= zoho.currenttime)
+											{
+												riskLevel = "SLA Breached";
+												overdueCount = overdueCount + 1;
+												overdueDays = rec.sla_due_date.toDate().daysBetween(zoho.currentdate);
+												issueDetails = "SLA overdue by " + overdueDays + " day(s)";
+											}
+											else if(rec.sla_due_date <= zoho.currenttime.addDay(2))
+											{
+												riskLevel = "SLA At Risk";
+												upcomingCount = upcomingCount + 1;
+												issueDetails = "SLA deadline approaching within 48 hours";
+											}
+											// Check officer assignment
+											if(rec.assigned_officer == null)
+											{
+												unassignedCount = unassignedCount + 1;
+												if(issueDetails != "")
+												{
+													issueDetails = issueDetails + "; ";
+												}
+												issueDetails = issueDetails + "Officer assignment missing";
+											}
+											// Build daily analysis log
+											analysisAction = "Central Intelligence Analysis - " + reportDate;
+											existingLog = complaint_activity_log[complaint == rec.ID && action_performed == analysisAction];
+											if(existingLog.count() == 0)
+											{
+												if(issueDetails == "")
+												{
+													issueDetails = "No immediate SLA or assignment issue detected";
+												}
+												insert into complaint_activity_log
+												[
+													complaint=rec.ID
+													previous_status=rec.status
+													new_status=rec.status
+													action_performed=analysisAction + " | Risk: " + riskLevel + " | Priority: " + rec.priority + " | " + issueDetails
+													changed_by=zoho.loginuser
+													activity_date_time=zoho.currenttime
+													Added_User=zoho.loginuser
+												]
+												processedCount = processedCount + 1;
+											}
+										}
+										// Final processing summary
+										info "================================";
+										info "CIVIC RESOLVE";
+										info "CENTRAL INTELLIGENCE ENGINE";
+										info "================================";
+										info "Analysis Date: " + reportDate;
+										info "Complaints Analyzed: " + processedCount;
+										info "SLA Breached: " + overdueCount;
+										info "SLA At Risk: " + upcomingCount;
+										info "Unassigned Complaints: " + unassignedCount;
+										info "================================";
+										info "Analysis Completed Successfully";
+						)
+					}
+    			}
+			}
+			Duplicate_Complaint_Detec
+			{
+    			display name = "Duplicate_Complaint_Detection_Engine"
+    			type = batchworkflow
+    			form = complaint
+    			event = "On Schedule"
+    			start = "08-Nov-2026 16:00:00"
+    			frequency = daily
+    			batch size = 1000
+    			status = active
+    			on execute 
+    			{
+					actions 
+					{
+						custom deluge script
+						(
+											allComplaints = complaint[complaint_title != null];
+										duplicateCount = 0;
+										newFlags = 0;
+										for each  rec in allComplaints
+										{
+											matchingComplaints = complaint[complaint_title == rec.complaint_title];
+											for each  matchRec in matchingComplaints
+											{
+												// Compare each pair only once
+												if(matchRec.ID < rec.ID && matchRec.citizen == rec.citizen)
+												{
+													duplicateCount = duplicateCount + 1;
+													duplicateAction = "Possible Duplicate Complaint - Matching Record ID: " + matchRec.ID;
+													existingLog = complaint_activity_log[complaint == rec.ID && action_performed == duplicateAction];
+													if(existingLog.count() == 0)
+													{
+														insert into complaint_activity_log
+														[
+															complaint=rec.ID
+															previous_status=rec.status
+															new_status=rec.status
+															action_performed=duplicateAction
+															changed_by=zoho.loginuser
+															activity_date_time=zoho.currenttime
+															Added_User=zoho.loginuser
+														]
+														newFlags = newFlags + 1;
+													}
+												}
+											}
+										}
+										info "================================";
+										info "CIVIC RESOLVE";
+										info "DUPLICATE DETECTION REPORT";
+										info "================================";
+										info "Total Complaints Scanned: " + allComplaints.count();
+										info "Possible Duplicate Pairs: " + duplicateCount;
+										info "New Duplicate Flags Created: " + newFlags;
+										info "================================";
+										info "Duplicate Detection Completed";
+						)
+					}
+    			}
+			}
+			Department_Performance_Op
+			{
+    			display name = "Department_Performance_Optimizer"
+    			type = batchworkflow
+    			form = complaint
+    			event = "On Schedule"
+    			start = "08-Nov-2026 15:00:00"
+    			frequency = daily
+    			batch size = 1000
+    			status = active
+    			on execute 
+    			{
+					actions 
+					{
+						custom deluge script
+						(
+											allDepartments = department[ID != 0];
+										allComplaints = complaint[ID != 0];
+										departmentCount = 0;
+										totalAnalyzed = 0;
+										report = "========================================\n";
+										report = report + "          CIVIC RESOLVE\n";
+										report = report + "   DEPARTMENT PERFORMANCE REPORT\n";
+										report = report + "========================================\n\n";
+										for each  dept in allDepartments
+										{
+											totalCases = 0;
+											activeCases = 0;
+											resolvedCases = 0;
+											closedCases = 0;
+											overdueCases = 0;
+											unassignedCases = 0;
+											for each  rec in allComplaints
+											{
+												if(rec.department == dept.ID)
+												{
+													totalCases = totalCases + 1;
+													if(rec.status == "Resolved")
+													{
+														resolvedCases = resolvedCases + 1;
+													}
+													else if(rec.status == "Closed")
+													{
+														closedCases = closedCases + 1;
+													}
+													else
+													{
+														activeCases = activeCases + 1;
+														if(rec.assigned_officer == null)
+														{
+															unassignedCases = unassignedCases + 1;
+														}
+														if(rec.sla_due_date != null && rec.sla_due_date <= zoho.currenttime)
+														{
+															overdueCases = overdueCases + 1;
+														}
+													}
+												}
+											}
+											if(totalCases > 0)
+											{
+												departmentCount = departmentCount + 1;
+												totalAnalyzed = totalAnalyzed + totalCases;
+												completedCases = resolvedCases + closedCases;
+												completionRate = (completedCases * 100.0) / totalCases;
+												report = report + "----------------------------------------\n" + "DEPARTMENT: " + dept.department_name + "\n" + "----------------------------------------\n" + "Total Complaints       : " + totalCases + "\n" + "Active Complaints      : " + activeCases + "\n" + "Resolved Complaints    : " + resolvedCases + "\n" + "Closed Complaints      : " + closedCases + "\n" + "Overdue Complaints     : " + overdueCases + "\n" + "Unassigned Complaints  : " + unassignedCases + "\n" + "Completion Rate        : " + completionRate + "%\n\n";
+											}
+										}
+										report = report + "========================================\n" + "FINAL PERFORMANCE SUMMARY\n" + "========================================\n" + "Departments Analyzed : " + departmentCount + "\n" + "Total Complaints     : " + totalAnalyzed + "\n" + "Report Date          : " + zoho.currentdate + "\n" + "========================================\n" + "Generated by Civic Resolve System";
+										info report;
+						)
+					}
+    			}
+			}
+		}
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Department Head"
+			{
+				name = "Department Head"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Oversee grievance resolution within their specific department \n"
+				ModulePermissions
+				{
+					citizen
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							citizen_by_preferred_contact_method={"View"}
+							citizen_Report={"View"}
+						}
+					}
+					complaint_activity_log
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							complaint_activity_log_Report={"View"}
+						}
+					}
+					closure_review
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							closure_review_Report={"View"}
+							closure_review_by_review_status={"View"}
+						}
+					}
+					complaint
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							complaint_by_category={"View","Edit","Delete"}
+							complaint_Report={"View","Edit","Delete"}
+						}
+					}
+					officer
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							officer_Report={"View","Edit","Delete"}
+							officer_by_role={"View","Edit","Delete"}
+						}
+					}
+					department
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							department_Report={"View","Edit","Delete"}
+						}
+					}
+					resolution_evidence
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							resolution_evidence_Report={"View","Edit","Delete"}
+							resolution_evidence_by_verification_status={"View","Edit","Delete"}
+						}
+					}
+					citizen_feedback
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							citizen_feedback_by_feedback_status={"View"}
+							citizen_feedback_Report={"View"}
+						}
+					}
+				}
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Grievance Officer"
+			{
+				name = "Grievance Officer"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Investigate assigned complaints and update status in real-time \n"
+				ModulePermissions
+				{
+					complaint_activity_log
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							complaint_activity_log_Report={"View","Edit","Delete"}
+						}
+					}
+					resolution_evidence
+					{
+						enabled= Create,Viewall,Modifyall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							resolution_evidence_Report={"View","Edit","Delete"}
+							resolution_evidence_by_verification_status={"View","Edit","Delete"}
+						}
+					}
+					complaint
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							complaint_by_category={"View","Edit","Delete"}
+							complaint_Report={"View","Edit","Delete"}
+						}
+					}
+					officer
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							officer_Report={"View","Edit","Delete"}
+							officer_by_role={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Compliance Reviewer"
+			{
+				name = "Compliance Reviewer"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Conduct closure reviews on resolved complaints to ensure quality \n"
+				ModulePermissions
+				{
+					closure_review
+					{
+						enabled= Create,Viewall,Modifyall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							closure_review_Report={"View","Edit","Delete"}
+							closure_review_by_review_status={"View","Edit","Delete"}
+						}
+					}
+					resolution_evidence
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							resolution_evidence_Report={"View"}
+							resolution_evidence_by_verification_status={"View"}
+						}
+					}
+					complaint
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							complaint_by_category={"View"}
+							complaint_Report={"View"}
+						}
+					}
+					citizen_feedback
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							citizen_feedback_by_feedback_status={"View"}
+							citizen_feedback_Report={"View"}
+						}
+					}
+				}
+			}
+			"System Administrator"
+			{
+				name = "System Administrator"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Manage user accounts and assign specific roles to officers and department heads \n"
+				ModulePermissions
+				{
+					citizen
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							citizen_by_preferred_contact_method={"View","Edit","Delete"}
+							citizen_Report={"View","Edit","Delete"}
+						}
+					}
+					resolution_evidence_BlueprintJob
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					officer
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							officer_Report={"View","Edit","Delete"}
+							officer_by_role={"View","Edit","Delete"}
+						}
+					}
+					Government_Notices_and_Letters
+					{
+						allFieldsVisible= true 
+					}
+					complaint_BlueprintJob
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					citizen_feedback
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							citizen_feedback_by_feedback_status={"View","Edit","Delete"}
+							citizen_feedback_Report={"View","Edit","Delete"}
+						}
+					}
+					complaint_activity_log
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							complaint_activity_log_Report={"View","Edit","Delete"}
+						}
+					}
+					closure_review
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							closure_review_Report={"View","Edit","Delete"}
+							closure_review_by_review_status={"View","Edit","Delete"}
+						}
+					}
+					complaint
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							complaint_by_category={"View","Edit","Delete"}
+							complaint_Report={"View","Edit","Delete"}
+						}
+					}
+					closure_review_BlueprintJob
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					department
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							department_Report={"View","Edit","Delete"}
+						}
+					}
+					resolution_evidence
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							resolution_evidence_Report={"View","Edit","Delete"}
+							resolution_evidence_by_verification_status={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Citizen Advocate"
+			{
+				name = "Citizen Advocate"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Submit complaints on behalf of individuals unable to access the system \n"
+				ModulePermissions
+				{
+					citizen
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							citizen_by_preferred_contact_method={"View"}
+							citizen_Report={"View"}
+						}
+					}
+					complaint_activity_log
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							complaint_activity_log_Report={"View"}
+						}
+					}
+					closure_review
+					{
+						enabled= Create,Viewall,Modifyall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							closure_review_Report={"View","Edit","Delete"}
+							closure_review_by_review_status={"View","Edit","Delete"}
+						}
+					}
+					complaint
+					{
+						enabled= Create,Viewall,Modifyall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							complaint_by_category={"View","Edit","Delete"}
+							complaint_Report={"View","Edit","Delete"}
+						}
+					}
+					citizen_feedback
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							citizen_feedback_by_feedback_status={"View"}
+							citizen_feedback_Report={"View"}
+						}
+					}
+				}
+			}
+			"Citizen"
+			{
+				name = "Citizen"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Register an account and submit detailed public grievance complaints \n"
+				ModulePermissions
+				{
+					citizen
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							citizen_by_preferred_contact_method={"View"}
+							citizen_Report={"View"}
+						}
+					}
+					citizen_feedback
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							citizen_feedback_by_feedback_status={"View"}
+							citizen_feedback_Report={"View"}
+						}
+					}
+				}
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+					"System Administrator"
+					{
+						description = "Manages the Civic Resolve application, users, departments, officers, permissions, and overall grievance records."
+						"Department Head"
+						{
+							description = "Supervises departmental grievance operations, monitors assigned complaints, and oversees grievance officers."
+							"Grievance Officer"
+							{
+								description = "Investigates assigned civic complaints, updates complaint status, records activities, and uploads resolution evidence."
+							}
+						}
+						"Compliance Reviewer"
+						{
+							description = "Reviews complaint resolution evidence, verifies closure requests, and approves or rejects complaint closure."
+						}
+					}
+				}
+			}
+	}
+
+
+	web
+	{
+		forms
+		{
+			form citizen
+			{
+				label placement = left
+			}
+			form citizen_feedback
+			{
+				label placement = left
+			}
+			form closure_review
+			{
+				label placement = left
+			}
+			form complaint
+			{
+				label placement = left
+			}
+			form complaint_activity_log
+			{
+				label placement = left
+			}
+			form department
+			{
+				label placement = left
+			}
+			form Government_Notices_and_Letters
+			{
+				label placement = left
+			}
+			form officer
+			{
+				label placement = left
+			}
+			form resolution_evidence
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report complaint_activity_log_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								complaint as "Complaint"
+								previous_status as "Previous Status"
+								new_status as "New Status"
+								action_performed as "Action Performed"
+								remarks as "Remarks"
+								changed_by as "Changed By"
+								activity_date_time as "Activity Date and Time"
+								previous_officer as "Previous Officer"
+								new_officer as "New Officer"
+								previous_department as "Previous Department"
+								new_department as "New Department"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								complaint as "Complaint"
+								previous_status as "Previous Status"
+								new_status as "New Status"
+								action_performed as "Action Performed"
+								remarks as "Remarks"
+								changed_by as "Changed By"
+								activity_date_time as "Activity Date and Time"
+								previous_officer as "Previous Officer"
+								new_officer as "New Officer"
+								previous_department as "Previous Department"
+								new_department as "New Department"
+							)
+						)
+						datablock2
+						(
+		     				title = "New Department"
+		     				related field = new_department
+							fields
+							(
+								department_name as "Department Name"
+								department_code as "Department Code"
+								department_description as "Department Description"
+								department_head as "Department Head"
+								contact_email as "Contact Email"
+								contact_phone as "Contact Phone"
+								office_location as "Office Location"
+								active_status as "Active Status"
+								created_date as "Created Date"
+							)
+						)
+						datablock3
+						(
+		     				title = "Complaint"
+		     				related field = complaint
+							fields
+							(
+								complaint_title as "Complaint Title"
+								complaint_description as "Complaint Description"
+								citizen as "Citizen"
+								category as "Category"
+								priority as "Priority"
+								location as "Location"
+								city as "City"
+								submission_date_time as "Submission Date and Time"
+								department as "Department"
+								assigned_officer as "Assigned Officer"
+								status as "Status"
+								sla_due_date as "SLA Due Date"
+								resolution_description as "Resolution Description"
+								resolution_date as "Resolution Date"
+								citizen_satisfaction_rating as "Citizen Satisfaction Rating"
+								citizen_feedback as "Citizen Feedback"
+								last_updated as "Last Updated"
+							)
+						)
+						datablock4
+						(
+		     				title = "New Officer"
+		     				related field = new_officer
+							fields
+							(
+								officer_name as "Officer Name"
+								employee_code as "Employee Code"
+								email as "Email"
+								phone_number as "Phone Number"
+								designation as "Designation"
+								department as "Department"
+								role as "Role"
+								active_status as "Active Status"
+								date_joined as "Date Joined"
+							)
+						)
+						datablock5
+						(
+		     				title = "Previous Department"
+		     				related field = previous_department
+							fields
+							(
+								department_name as "Department Name"
+								department_code as "Department Code"
+								department_description as "Department Description"
+								department_head as "Department Head"
+								contact_email as "Contact Email"
+								contact_phone as "Contact Phone"
+								office_location as "Office Location"
+								active_status as "Active Status"
+								created_date as "Created Date"
+							)
+						)
+						datablock6
+						(
+		     				title = "Previous Officer"
+		     				related field = previous_officer
+							fields
+							(
+								officer_name as "Officer Name"
+								employee_code as "Employee Code"
+								email as "Email"
+								phone_number as "Phone Number"
+								designation as "Designation"
+								department as "Department"
+								role as "Role"
+								active_status as "Active Status"
+								date_joined as "Date Joined"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report complaint_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								ID
+								citizen as "Citizen"
+								complaint_title as "Complaint Title"
+								complaint_description as "Complaint Description"
+								category as "Category"
+								priority as "Priority"
+								location as "Location"
+								city as "City"
+								submission_date_time as "Submission Date and Time"
+								department as "Department"
+								assigned_officer as "Assigned Officer"
+								status as "Status"
+								sla_due_date as "SLA Due Date"
+								resolution_description as "Resolution Description"
+								resolution_date as "Resolution Date"
+								citizen_satisfaction_rating as "Citizen Satisfaction Rating"
+								citizen_feedback as "Citizen Feedback"
+								last_updated as "Last Updated"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								complaint_title as "Complaint Title"
+								complaint_description as "Complaint Description"
+								category as "Category"
+								priority as "Priority"
+								location as "Location"
+								city as "City"
+								submission_date_time as "Submission Date and Time"
+								department as "Department"
+								assigned_officer as "Assigned Officer"
+								status as "Status"
+								sla_due_date as "SLA Due Date"
+								resolution_description as "Resolution Description"
+								resolution_date as "Resolution Date"
+								citizen_satisfaction_rating as "Citizen Satisfaction Rating"
+								citizen_feedback as "Citizen Feedback"
+								last_updated as "Last Updated"
+							)
+						)
+						datablock2
+						(
+		     				title = "Department"
+		     				related field = department
+							fields
+							(
+								department_name as "Department Name"
+								department_code as "Department Code"
+								department_description as "Department Description"
+								department_head as "Department Head"
+								contact_email as "Contact Email"
+								contact_phone as "Contact Phone"
+								office_location as "Office Location"
+								active_status as "Active Status"
+								created_date as "Created Date"
+							)
+						)
+						datablock3
+						(
+		     				title = "Assigned Officer"
+		     				related field = assigned_officer
+							fields
+							(
+								officer_name as "Officer Name"
+								employee_code as "Employee Code"
+								email as "Email"
+								phone_number as "Phone Number"
+								designation as "Designation"
+								department as "Department"
+								role as "Role"
+								active_status as "Active Status"
+								date_joined as "Date Joined"
+							)
+						)
+						datablock4
+						(
+		     				title = "Citizen"
+		     				related field = citizen
+							fields
+							(
+								citizen_name as "Citizen Name"
+								email as "Email"
+								mobile_number as "Mobile Number"
+								address as "Address"
+								postal_code1 as "Postal Code"
+								preferred_contact_method as "Preferred Contact Method"
+								registration_date as "Registration Date"
+								account_status as "Account Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report complaint_by_category
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								complaint_title as "Complaint Title"
+								location as "Location"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								complaint_title as "Complaint Title"
+								complaint_description as "Complaint Description"
+								citizen as "Citizen"
+								category as "Category"
+								priority as "Priority"
+								location as "Location"
+								city as "City"
+								submission_date_time as "Submission Date and Time"
+								department as "Department"
+								assigned_officer as "Assigned Officer"
+								status as "Status"
+								sla_due_date as "SLA Due Date"
+								resolution_description as "Resolution Description"
+								resolution_date as "Resolution Date"
+								citizen_satisfaction_rating as "Citizen Satisfaction Rating"
+								citizen_feedback as "Citizen Feedback"
+								last_updated as "Last Updated"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report resolution_evidence_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								complaint as "Complaint"
+								uploaded_by as "Uploaded By"
+								evidence_type as "Evidence Type"
+								evidence_description as "Evidence Description"
+								evidence_attachment as "Evidence Attachment"
+								submission_date as "Submission Date"
+								verification_status as "Verification Status"
+								verified_by as "Verified By"
+								verification_remarks as "Verification Remarks"
+								verification_date as "Verification Date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								complaint as "Complaint"
+								uploaded_by as "Uploaded By"
+								evidence_type as "Evidence Type"
+								evidence_description as "Evidence Description"
+								evidence_attachment as "Evidence Attachment"
+								submission_date as "Submission Date"
+								verification_status as "Verification Status"
+								verified_by as "Verified By"
+								verification_remarks as "Verification Remarks"
+								verification_date as "Verification Date"
+							)
+						)
+						datablock2
+						(
+		     				title = "Uploaded By"
+		     				related field = uploaded_by
+							fields
+							(
+								officer_name as "Officer Name"
+								employee_code as "Employee Code"
+								email as "Email"
+								phone_number as "Phone Number"
+								designation as "Designation"
+								department as "Department"
+								role as "Role"
+								active_status as "Active Status"
+								date_joined as "Date Joined"
+							)
+						)
+						datablock3
+						(
+		     				title = "Verified By"
+		     				related field = verified_by
+							fields
+							(
+								officer_name as "Officer Name"
+								employee_code as "Employee Code"
+								email as "Email"
+								phone_number as "Phone Number"
+								designation as "Designation"
+								department as "Department"
+								role as "Role"
+								active_status as "Active Status"
+								date_joined as "Date Joined"
+							)
+						)
+						datablock4
+						(
+		     				title = "Complaint"
+		     				related field = complaint
+							fields
+							(
+								complaint_title as "Complaint Title"
+								complaint_description as "Complaint Description"
+								citizen as "Citizen"
+								category as "Category"
+								priority as "Priority"
+								location as "Location"
+								city as "City"
+								submission_date_time as "Submission Date and Time"
+								department as "Department"
+								assigned_officer as "Assigned Officer"
+								status as "Status"
+								sla_due_date as "SLA Due Date"
+								resolution_description as "Resolution Description"
+								resolution_date as "Resolution Date"
+								citizen_satisfaction_rating as "Citizen Satisfaction Rating"
+								citizen_feedback as "Citizen Feedback"
+								last_updated as "Last Updated"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report resolution_evidence_by_verification_status
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								evidence_type as "Evidence Type"
+								complaint as "Complaint"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								complaint as "Complaint"
+								uploaded_by as "Uploaded By"
+								evidence_type as "Evidence Type"
+								evidence_description as "Evidence Description"
+								evidence_attachment as "Evidence Attachment"
+								submission_date as "Submission Date"
+								verification_status as "Verification Status"
+								verified_by as "Verified By"
+								verification_remarks as "Verification Remarks"
+								verification_date as "Verification Date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report citizen_feedback_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								complaint as "Complaint"
+								rating as "Rating"
+								feedback_comments as "Feedback Comments"
+								submitted_date as "Submitted Date"
+								feedback_status as "Feedback Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								complaint as "Complaint"
+								rating as "Rating"
+								feedback_comments as "Feedback Comments"
+								submitted_date as "Submitted Date"
+								feedback_status as "Feedback Status"
+							)
+						)
+						datablock2
+						(
+		     				title = "Citizen"
+		     				related field = citizen
+							fields
+							(
+								citizen_name as "Citizen Name"
+								email as "Email"
+								mobile_number as "Mobile Number"
+								address as "Address"
+								postal_code1 as "Postal Code"
+								preferred_contact_method as "Preferred Contact Method"
+								registration_date as "Registration Date"
+								account_status as "Account Status"
+							)
+						)
+						datablock3
+						(
+		     				title = "Complaint"
+		     				related field = complaint
+							fields
+							(
+								complaint_title as "Complaint Title"
+								complaint_description as "Complaint Description"
+								category as "Category"
+								priority as "Priority"
+								location as "Location"
+								city as "City"
+								submission_date_time as "Submission Date and Time"
+								department as "Department"
+								assigned_officer as "Assigned Officer"
+								status as "Status"
+								sla_due_date as "SLA Due Date"
+								resolution_description as "Resolution Description"
+								resolution_date as "Resolution Date"
+								citizen_satisfaction_rating as "Citizen Satisfaction Rating"
+								citizen_feedback as "Citizen Feedback"
+								last_updated as "Last Updated"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report citizen_feedback_by_feedback_status
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								complaint as "Complaint"
+								citizen as "Citizen"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								complaint as "Complaint"
+								citizen as "Citizen"
+								rating as "Rating"
+								feedback_comments as "Feedback Comments"
+								submitted_date as "Submitted Date"
+								feedback_status as "Feedback Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report department_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								department_name as "Department Name"
+								department_code as "Department Code"
+								department_description as "Department Description"
+								department_head as "Department Head"
+								contact_email as "Contact Email"
+								contact_phone as "Contact Phone"
+								office_location as "Office Location"
+								active_status as "Active Status"
+								created_date as "Created Date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								department_name as "Department Name"
+								department_code as "Department Code"
+								department_description as "Department Description"
+								department_head as "Department Head"
+								contact_email as "Contact Email"
+								contact_phone as "Contact Phone"
+								office_location as "Office Location"
+								active_status as "Active Status"
+								created_date as "Created Date"
+							)
+						)
+						datablock2
+						(
+		     				title = "Department Head"
+		     				related field = department_head
+							fields
+							(
+								officer_name as "Officer Name"
+								employee_code as "Employee Code"
+								email as "Email"
+								phone_number as "Phone Number"
+								designation as "Designation"
+								department as "Department"
+								role as "Role"
+								active_status as "Active Status"
+								date_joined as "Date Joined"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report citizen_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								citizen_name as "Citizen Name"
+								email as "Email"
+								mobile_number as "Mobile Number"
+								address as "Address"
+								postal_code1 as "Postal Code"
+								preferred_contact_method as "Preferred Contact Method"
+								registration_date as "Registration Date"
+								account_status as "Account Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								citizen_name as "Citizen Name"
+								email as "Email"
+								mobile_number as "Mobile Number"
+								address as "Address"
+								postal_code1 as "Postal Code"
+								preferred_contact_method as "Preferred Contact Method"
+								registration_date as "Registration Date"
+								account_status as "Account Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report citizen_by_preferred_contact_method
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								citizen_name as "Citizen Name"
+								postal_code1 as "Postal Code"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								citizen_name as "Citizen Name"
+								email as "Email"
+								mobile_number as "Mobile Number"
+								address as "Address"
+								postal_code1 as "Postal Code"
+								preferred_contact_method as "Preferred Contact Method"
+								registration_date as "Registration Date"
+								account_status as "Account Status"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report closure_review_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								complaint_selection as "Complaint Selection"
+								requested_by as "Requested By"
+								review_reason as "Review Reason"
+								review_description as "Review Description"
+								evidence_attachment as "Evidence Attachment"
+								review_status as "Review Status"
+								assigned_reviewer as "Assigned Reviewer"
+								review_remarks as "Review Remarks"
+								review_date as "Review Date"
+								created_date as "Created Date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+	 					type = 1
+						datablock1
+						(
+							layout type = -6
+		     				title = "Overview"
+							fields
+							(
+								Active_Status_Prediction as "Active Status Prediction"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report closure_review_by_review_status
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								review_reason as "Review Reason"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								requested_by as "Requested By"
+								review_reason as "Review Reason"
+								review_description as "Review Description"
+								evidence_attachment as "Evidence Attachment"
+								review_status as "Review Status"
+								assigned_reviewer as "Assigned Reviewer"
+								review_remarks as "Review Remarks"
+								review_date as "Review Date"
+								created_date as "Created Date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report officer_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								officer_name as "Officer Name"
+								employee_code as "Employee Code"
+								email as "Email"
+								phone_number as "Phone Number"
+								designation as "Designation"
+								department as "Department"
+								role as "Role"
+								active_status as "Active Status"
+								date_joined as "Date Joined"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								officer_name as "Officer Name"
+								employee_code as "Employee Code"
+								email as "Email"
+								phone_number as "Phone Number"
+								designation as "Designation"
+								department as "Department"
+								role as "Role"
+								active_status as "Active Status"
+								date_joined as "Date Joined"
+							)
+						)
+						datablock2
+						(
+		     				title = "Department"
+		     				related field = department
+							fields
+							(
+								department_name as "Department Name"
+								department_code as "Department Code"
+								department_description as "Department Description"
+								department_head as "Department Head"
+								contact_email as "Contact Email"
+								contact_phone as "Contact Phone"
+								office_location as "Office Location"
+								active_status as "Active Status"
+								created_date as "Created Date"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report officer_by_role
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								officer_name as "Officer Name"
+								employee_code as "Employee Code"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								officer_name as "Officer Name"
+								employee_code as "Employee Code"
+								email as "Email"
+								phone_number as "Phone Number"
+								designation as "Designation"
+								department as "Department"
+								role as "Role"
+								active_status as "Active Status"
+								date_joined as "Date Joined"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report Government_Notices_and_Letters_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Image
+								Issuing_Authority as "Issuing Authority"
+								Notice_Content as "Notice Content"
+								Notice_Number as "Notice Number"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								Image
+								Issuing_Authority as "Issuing Authority"
+								Notice_Content as "Notice Content"
+								Notice_Number as "Notice Number"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Dashboard
+				{
+					displayname = "Dashboard"
+					icon = "ui-1-dashboard-half"
+					page Dashboard
+					{
+						icon = "ui-1-dashboard-half"
+					}
+				}
+				section Section_2
+				{
+					displayname = "Complaint Activity Log"
+					icon = "health-pulse"
+					form  complaint_activity_log
+					{
+						icon = "ui-1-bold-add"
+					}
+					report complaint_activity_log_Report
+					{
+						icon = "business-laptop-71"
+					}
+				}
+				section Section_3
+				{
+					displayname = "Complaints"
+					icon = "tech-headphones"
+					form  complaint
+					{
+						icon = "ui-1-bold-add"
+					}
+					report complaint_Report
+					{
+						icon = "travel-world"
+					}
+					report complaint_by_category
+					{
+						icon = "design-2-selection"
+					}
+				}
+				section Section_4
+				{
+					displayname = "Resolution Evidence"
+					icon = "education-paper"
+					form  resolution_evidence
+					{
+						icon = "ui-1-bold-add"
+					}
+					report resolution_evidence_Report
+					{
+						icon = "travel-world"
+					}
+					report resolution_evidence_by_verification_status
+					{
+						icon = "users-2-contacts-45"
+					}
+				}
+				section Section_5
+				{
+					displayname = "Feedback"
+					icon = "tech-keyboard"
+					form  citizen_feedback
+					{
+						icon = "ui-1-bold-add"
+					}
+					report citizen_feedback_Report
+					{
+						icon = "travel-world"
+					}
+					report citizen_feedback_by_feedback_status
+					{
+						icon = "tech-keyboard"
+					}
+				}
+				section Section_6
+				{
+					displayname = "Departments"
+					icon = "business-hierarchy-53"
+					form  department
+					{
+						icon = "ui-1-bold-add"
+					}
+					report department_Report
+					{
+						icon = "business-hierarchy-53"
+					}
+				}
+				section Section_7
+				{
+					displayname = "Citizen"
+					icon = "users-2-woman"
+					form  citizen
+					{
+						icon = "ui-1-bold-add"
+					}
+					report citizen_Report
+					{
+						icon = "business-laptop-71"
+					}
+					report citizen_by_preferred_contact_method
+					{
+						icon = "users-2-woman"
+					}
+				}
+				section Section_8
+				{
+					displayname = "Closure Reviews"
+					icon = "education-board-51"
+					form  closure_review
+					{
+						icon = "ui-1-bold-add"
+					}
+					report closure_review_Report
+					{
+						icon = "travel-world"
+					}
+					report closure_review_by_review_status
+					{
+						icon = "education-board-51"
+					}
+				}
+				section Section_9
+				{
+					displayname = "Officers"
+					icon = "users-2-police"
+					form  officer
+					{
+						icon = "ui-1-bold-add"
+					}
+					report officer_Report
+					{
+						icon = "travel-world"
+					}
+					report officer_by_role
+					{
+						icon = "media-1-play-69"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+				section Government_Notices_and_Letters
+				{
+					displayname = "Government Notices and Letters"
+					icon = "sport-cardio"
+					form  Government_Notices_and_Letters
+					{
+						icon = "sport-cardio"
+					}
+					report Government_Notices_and_Letters_Report
+					{
+						icon = "tech-desktop"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = solid
+					show = {space,section,component}
+				}
+			}
+		}
+		customize
+		{
+			layout
+			{
+				theme = "theme_12"
+			}
+			font = "lato"
+			color options
+			{
+				color = "11"
+			}
+			logo
+			{
+				preference = "app_icon"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form citizen
+			{
+				label placement = auto
+			}
+			form citizen_feedback
+			{
+				label placement = auto
+			}
+			form closure_review
+			{
+				label placement = auto
+			}
+			form complaint
+			{
+				label placement = auto
+			}
+			form complaint_activity_log
+			{
+				label placement = auto
+			}
+			form department
+			{
+				label placement = auto
+			}
+			form officer
+			{
+				label placement = auto
+			}
+			form resolution_evidence
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				name = "custom_color_1"
+				brand color = "#21d4c2"
+				type = "custom"
+				dark mode color = "#21d4c2"
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form citizen
+			{
+				label placement = auto
+			}
+			form citizen_feedback
+			{
+				label placement = auto
+			}
+			form closure_review
+			{
+				label placement = auto
+			}
+			form complaint
+			{
+				label placement = auto
+			}
+			form complaint_activity_log
+			{
+				label placement = auto
+			}
+			form department
+			{
+				label placement = auto
+			}
+			form officer
+			{
+				label placement = auto
+			}
+			form resolution_evidence
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				name = "custom_color_1"
+				brand color = "#21d4c2"
+				type = "custom"
+				dark mode color = "#21d4c2"
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
